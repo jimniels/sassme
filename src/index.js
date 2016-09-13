@@ -4,7 +4,7 @@ import {isEmpty, startsWith} from 'lodash';
 import App from './scripts/components/App';
 import './index.css';
 
-// @type {QueryParams}
+// @type {SassMeState}
 const initialState = getQueryParams();
 
 ReactDOM.render(
@@ -15,37 +15,26 @@ ReactDOM.render(
 
 
 /**
- * QueryString consists of the key value pairs coming from the URL. The following
- * keys will be considered:
+ * The query string can contain supported key/value in the URL which will set
+ * the initial app state.
  *
- *   hex - Hexadecimal number without the '#' (though will parse with)
- *   lighten - Value for sass function `lighten()`, supported range: [0 -> 100]
- *   darken - Value for sass function `darken()`, supported range: [0 -> 100]
- *   saturate - Value for sass function `saturate()`, supported range: [0 -> 100]
- *   desatruate - Value for sass function `desatruate()`, supported range: [0 -> 100]
- *   adjustHue - Value for sass function `adjust-hue()`, supported range: [-360 -> 360]
+ * The URL paramters will be parsed and added to the final SassMeState object
+ * if they exist and fall within their respective thresholds.This populates the
+ * intial state of <App />
  *
- * These are then parsed and added to the final QueryParams object if values
- * exist and fall within the requirements/threshold for each value.
- *
- * @typedef {QueryParams}
- * @property {String} hex
- *   Hexadecimal number without the '#' (though will parse with)
- * @property {number} lightness
- *   Initial state value, combines `lighten` and `darken` from QueryString.
- *   Supported range: [-100 -> 100]
- * @property {number} saturation
- *   Initial state value, combines `saturate` and `desaturate` from QueryString.
- *   Supported range: [0 -> 100]
- * @property {number} hue -
- *   Initial state value, matches `adjustHue` from QueryString.
- *   Supported range: [-360 -> 360]
+ * @typedef {Object} SassMeState
+ * @property {String} hex - Value, valid 6 character hexadecimal color
+ * @property {number} lighten - Value [0 -> 100]
+ * @property {number} darken - Value [0 -> 100]
+ * @property {number} saturate - Value [0 -> 100]
+ * @property {number} desaturate - Value [0 -> 100]
+ * @property {number} adjust_hue - Value [-360 -> 360]
  */
 
 /**
  * Get and validate the query params and return them as object key/value pairs
  *
- * @return {QueryParams} - An object of supported key/value pairs for the App
+ * @return {SassMeState} - An object of supported key/value pairs for the App
  */
 function getQueryParams() {
   const query = window.location.search.substring(1); // remove the '?'
@@ -62,8 +51,8 @@ function getQueryParams() {
     // Only populate the object if it's a supported key
     if (!isEmpty(key) && !isEmpty(value)) {
       switch (key) {
+        // Remove any '#' and set the value IF it's valid, i.e. length of 6
         case 'hex':
-          // Remove any '#' and set the value IF it's valid, i.e. length of 6
           if (startsWith(value, '#')) {
             value = value.slice(1);
           }
@@ -71,39 +60,20 @@ function getQueryParams() {
             out.hex = decodeURIComponent(value);
           }
           break;
+        // These all have the same threshold, So make sure they fall within in
+        // and if they do, add them
         case 'lighten':
-          // Make sure it falls within our threshold, add it to current `lightness` value
-          if (value >= 0 && value <= 100) {
-            const {lightness=0} = out;
-            out.lightness = lightness + Number(decodeURIComponent(value));
-          }
-          break;
         case 'darken':
-          // Make sure it falls within our threshold, subtract it from current `lightness` value
-          if (value >= 0 && value <= 100) {
-            const {lightness=0} = out;
-            out.lightness = lightness - Number(decodeURIComponent(value));
-          }
-          break;
         case 'saturate':
-          // Make sure it falls within our threshold, add it to current `lightness` value
-          if (value >= 0 && value <= 100) {
-            const {saturation=0} = out;
-            out.saturation = saturation + Number(decodeURIComponent(value));
-          }
-          break;
         case 'desaturate':
-          // Make sure it falls within our threshold, subtract it from current `lightness` value
           if (value >= 0 && value <= 100) {
-            const {saturation=0} = out;
-            out.saturation = saturation - Number(decodeURIComponent(value));
+            out[key] = Number(decodeURIComponent(value));
           }
           break;
-        case 'adjustHue':
-          // Make sure it falls within our threshold, subtract it from current `lightness` value
-          if (value >= 360 && value <= -360) {
-            const {hue=0} = out;
-            out.hue = hue + Number(decodeURIComponent(value));
+        // Make sure it falls within our threshold, if so, add it
+        case 'adjust_hue':
+          if (value >= -360 && value <= 360) {
+            out.adjust_hue = Number(decodeURIComponent(value));
           }
           break;
         default:

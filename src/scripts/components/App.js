@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {isNil, teamplate, toString, reduce} from 'lodash';
+import {isNil, teamplate, toString, reduce, pickBy, pick} from 'lodash';
 import {hex2hsl, hsl2hex} from '../utils/colorConversions';
-import {lighten, saturate, adjustHue} from '../utils/colorTransforms';
+import {getCode, transformHex} from '../utils/colorTransforms';
 import Header from './Header';
+import SassTests from './SassTests';
 
 export default class App extends Component {
   constructor(props) {
@@ -13,79 +14,6 @@ export default class App extends Component {
     };
   }
 
-  calculateOutputHex = () => {
-    const {hex, lightness, saturation, hue} = this.state;
-    let hsl = hex2hsl(hex);
-
-    if (!isNil(lightness)) {
-      const newLightness = hsl.l + lightness;
-      if (newLightness < 0) {
-        hsl.l = 0;
-      } else if (newLightness > 100) {
-        hsl.l = 100;
-      } else {
-        hsl.l = newLightness;
-      }
-    }
-
-    if (!isNil(saturation)) {
-      const newSaturation = hsl.s + saturation;
-      if (newSaturation < 0) {
-        hsl.s = 0;
-      } else if (newSaturation > 100) {
-        hsl.s = 100;
-      } else {
-        hsl.s = newSaturation;
-      }
-    }
-
-    if (!isNil(hue)) {
-      const newHue = hsl.h + hue;
-      if (newHue < -360) {
-        hsl.h = newHue + 360;
-      } else if (newHue > 360) {
-        hsl.h = newHue - 360;
-      } else {
-        hsl.h = newHue;
-      }
-    }
-
-    return hsl2hex(hsl);
-  }
-
-  outputCode = () => {
-    const {hex, lightness, saturation, hue} = this.state;
-    let funcs = [];
-
-    if (!isNil(lightness)) {
-      funcs.push({
-        name: lightness >= 0 ? 'lighten' : 'darken',
-        value: lightness >= 0 ? lightness : Math.abs(lightness)
-      });
-    }
-
-    if (!isNil(saturation)) {
-      funcs.push({
-        name: saturation >= 0 ? 'saturate' : 'desaturate',
-        value: saturation >= 0 ? saturation : Math.abs(saturation)
-      });
-    }
-
-    if (!isNil(hue)) {
-      funcs.push({
-        name: 'adjust-hue',
-        value: hue
-      });
-    }
-
-    return funcs.length > 0
-      ? reduce(funcs, (accum, func) => {
-          const {name, value} = func;
-          return `${name}(${accum}, ${Math.round(value)})`;
-        }, '#' + hex)
-      : '';
-  }
-
   handleInputHex = (e) => {
     // Strip out non-hexadecimal values
     let input = e.target.value.match(/[0-9A-Fa-f]/g);
@@ -94,41 +22,93 @@ export default class App extends Component {
     // Set the input and reset the sliders
     this.setState({
       hex: input,
-      lightness: undefined,
-      saturation: undefined,
-      hue: undefined
+      lighten: undefined,
+      darken: undefined,
+      saturate: undefined,
+      desaturate: undefined,
+      adjust_hue: undefined
+    });
+  }
+
+  handleLighten = (e) => {
+    const newVal = Number(e.target.value);
+    this.setState({
+      lighten: newVal >= 0 ? newVal : this.state.lighten,
+      darken: newVal >= 0 ? this.state.darken : Math.abs(newVal)
     });
   }
 
   handleInputSlider = (stateKey, e) => {
+    const input = Number(e.target.value);
+
     let newState = {};
-    newState[stateKey] = Number(e.target.value);
+    if (stateKey === 'lighten') {
+      if (input < 0) {
+        newState.darken = Math.abs(input);
+        newState.lighten = undefined;
+      } else {
+        newState.lighten = input
+        newState.darken = undefined;
+      }
+    } else if (stateKey === 'saturate') {
+      if (input < 0) {
+        newState.desaturate = Math.abs(input);
+        newState.saturate = undefined;
+      } else {
+        newState.saturate = input
+        newState.desaturate = undefined;
+      }
+    } else if (stateKey === 'adjust_hue') {
+      newState.adjust_hue = input;
+    }
+
     this.setState(newState);
   }
 
   handleResetInputSlider = (stateKey) => {
     let newState = {};
-    newState[stateKey] = undefined;
+    if (stateKey === 'lighten') {
+      newState.lighten = undefined;
+      newState.darken = undefined;
+    } else if (stateKey === 'saturate') {
+      newState.saturate = undefined;
+      newState.desatruate = undefined;
+    } else if (stateKey === 'adjust_hue') {
+      newState.adjust_hue = undefined;
+    }
+
     this.setState(newState);
   }
 
   render() {
-    const {hex, lightness, saturation, hue} = this.state;
+    const {hex, lighten, darken, saturate, desaturate, adjust_hue} = this.state;
 
     const hexIsValid = hex.length === 6;
 
     const swatchPointerBorder = hexIsValid ? {borderLeftColor: '#' + hex} : {};
     const swatch1bg = hexIsValid ? {backgroundColor: '#' + hex} : {};
 
-    const outputHex = hexIsValid ? this.calculateOutputHex() : '';
+    const outputHex = hexIsValid
+      ? transformHex({
+          hex,
+          lighten,
+          darken,
+          saturate,
+          desaturate,
+          adjust_hue
+        })
+      : '';
+    const outputCode = getCode(this.state);
     const swatch2bg = hexIsValid ? {backgroundColor: '#' + outputHex} : {};
     const formClass = hexIsValid ? 'active' : 'inactive';
     const helpStyle = {display: hexIsValid ? 'none' : 'block'};
 
 
-    const inputLightnessValue = !isNil(lightness) ? lightness : '0';
-    const inputSaturationValue = !isNil(saturation) ? saturation : '0';
-    const inputHueValue = !isNil(hue) ? hue : '0';
+    const inputLightnessValue = (!isNil(lighten) ? lighten : 0) - (!isNil(darken) ? darken : 0);
+    const inputSaturationValue = (!isNil(saturate) ? saturate : 0) - (!isNil(desaturate) ? desaturate : 0);
+    const inputHueValue = !isNil(adjust_hue) ? adjust_hue : '0';
+
+    const isDev = process.env.NODE_ENV !== 'production' ? true : false;
 
     return (
       <div>
@@ -182,7 +162,7 @@ export default class App extends Component {
                     tabIndex='-1'
                     readOnly='readonly'
                     placeholder='Fiddle with the sliders to get the SASS'
-                    value={this.outputCode()}
+                    value={outputCode}
                   />
                 </div>
                 <div className='codeHelp'>
@@ -194,8 +174,7 @@ export default class App extends Component {
                 <a
                   href='#'
                   className='reset'
-                  style={{opacity: !isNil(lightness) ? 1 : .25}}
-                  onClick={this.handleResetInputSlider.bind(this, 'lightness')}>
+                  onClick={this.handleResetInputSlider.bind(this, 'lighten')}>
                   Reset
                 </a>
                 <input
@@ -204,33 +183,33 @@ export default class App extends Component {
                   max='100'
                   disabled={!hexIsValid}
                   id='slider_l'
-                  onChange={this.handleInputSlider.bind(this, 'lightness')}
+                  onChange={this.handleInputSlider.bind(this, 'lighten')}
                   value={toString(inputLightnessValue)}
                 />
                 <label htmlFor='slider_l'>&larr; darken | lighten &rarr;</label>
               </li>
               <li className='listItem slider'>
-                <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'saturation')}>Reset</a>
+                <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'saturate')}>Reset</a>
                 <input
                   type='range'
                   min='-100'
                   max='100'
                   disabled={!hexIsValid}
                   id='slider_s'
-                  onChange={this.handleInputSlider.bind(this, 'saturation')}
+                  onChange={this.handleInputSlider.bind(this, 'saturate')}
                   value={toString(inputSaturationValue)}
                 />
                 <label htmlFor='slider_s'>&larr; desaturate | saturate &rarr;</label>
               </li>
               <li className='listItem slider'>
-                <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'hue')}>Reset</a>
+                <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'adjust_hue')}>Reset</a>
                 <input
                   type='range'
                   min='-360'
                   max='360'
                   disabled={!hexIsValid}
                   id='slider_h'
-                  onChange={this.handleInputSlider.bind(this, 'hue')}
+                  onChange={this.handleInputSlider.bind(this, 'adjust_hue')}
                   value={toString(inputHueValue)}
                 />
                 <label htmlFor='slider_h'>&larr; adjust hue &rarr;</label>
@@ -238,6 +217,9 @@ export default class App extends Component {
             </ul>
           </form>
         </section>
+
+        {isDev &&
+          <SassTests />}
       </div>
     );
   }
@@ -245,13 +227,18 @@ export default class App extends Component {
 
 App.propTypes = {
   hex: React.PropTypes.string,
-  lightness: React.PropTypes.number,
-  saturation: React.PropTypes.number,
-  hue: React.PropTypes.number
+  lighten: React.PropTypes.number,
+  darken: React.PropTypes.number,
+  saturate: React.PropTypes.number,
+  desaturate: React.PropTypes.number,
+  adjust_hue: React.PropTypes.number
 };
+// @type {SassMeState}
 App.defaultProps = {
   hex: '',
-  lightness: undefined,
-  saturation: undefined,
-  hue: undefined
+  lighten: undefined,
+  darken: undefined,
+  saturate: undefined,
+  desaturate: undefined,
+  adjust_hue: undefined
 };

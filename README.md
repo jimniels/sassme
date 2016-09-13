@@ -11,7 +11,7 @@ Dynamically view the output of Sass color functions in the browser. The followin
 - [`adjust-hue()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#adjust_hue-instance_method)
 
 
-## Notes
+## About
 
 ### History
 

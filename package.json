@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "lodash": "^4.15.0",
+    "node-sass": "^3.9.3",
     "react-scripts": "0.4.1"
   },
   "dependencies": {
@@ -11,6 +12,8 @@
     "react-dom": "^15.3.1"
   },
   "scripts": {
+    "css:watch": "./node_modules/node-sass/bin/node-sass -w src/styles/index.scss src/index.css",
+    "css:build": "./node_modules/node-sass/bin/node-sass src/styles/index.scss src/index.css",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

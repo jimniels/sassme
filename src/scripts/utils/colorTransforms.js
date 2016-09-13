@@ -1,51 +1,98 @@
-import {hex2rgb, rgb2hsl, hsl2rgb, rgb2hex} from './colorConversions';
+import {hex2hsl, hsl2hex} from './colorConversions';
+import {isNil, reduce} from 'lodash';
 
 /**
- * Lighten a hex color
+ * Transform HEX given a SassMeState object
  *
- * @param {String} hex
- * @param {number} percentage - Number limited to range of 0-100 (inclusive)
- * @return {String} hex - Hex value after lightness was modified based on percentage
+ * @param {SassMeState}
+ * @return {String} - Hex color out
  */
-export function lighten(hex, percentage) {
-  const hsl = rgb2hsl(hex2rgb(hex));
-  hsl.l = normalizeRange(percentage, 0, 100);
-  return rgb2hex(hsl2rgb(hsl));
-}
+export function transformHex(SassMeState) {
+  const {hex, lighten, darken, saturate, desaturate, adjust_hue} = SassMeState;
 
-/**
- * Saturate a hex color
- *
- * @param {String} hex
- * @param {number} percentage - Number limited to range of 0-100 (inclusive)
- * @return {String} hex - Hex value after saturation was modified based on percentage
- */
-export function saturate(hex, percentage) {
-  const hsl = rgb2hsl(hex2rgb(hex));
-  hsl.s = normalizeRange(percentage, 0, 100);
-  return rgb2hex(hsl2rgb(hsl));
-}
+  let hsl = hex2hsl(hex);
 
-export function adjustHue(hex, degree) {
-  const hsl = rgb2hsl(hex2rgb(hex));
-  hsl.h = normalizeRange(degree, 0, 360);
-  return rgb2hex(hsl2rgb(hsl));
-}
-
-/**
- * Normalize value according to a given range
- *
- * @param  {number} value - The value we're testing to see if it's in a range
- * @param  {number} limitLow - The low-end limit
- * @param  {number} limitHigh - The high-end limit
- * @return {number} - Normalized value
- */
-function normalizeRange(value, limitLow, limitHigh) {
-  if (value < limitLow) {
-    value = limitLow;
+  if (!isNil(lighten)) {
+    const newVal = hsl.l + lighten;
+    if (newVal < 0) {
+      hsl.l = 0;
+    } else if (newVal > 100) {
+      hsl.l = 100;
+    } else {
+      hsl.l = newVal;
+    }
   }
-  if (value > limitHigh) {
-    value = limitHigh;
+
+  if (!isNil(darken)) {
+    const newVal = hsl.l - darken;
+    if (newVal < 0) {
+      hsl.l = 0;
+    } else if (newVal > 100) {
+      hsl.l = 100;
+    } else {
+      hsl.l = newVal;
+    }
   }
-  return value;
+
+  if (!isNil(saturate)) {
+    const newVal = hsl.s + saturate;
+    if (newVal < 0) {
+      hsl.s = 0;
+    } else if (newVal > 100) {
+      hsl.s = 100;
+    } else {
+      hsl.s = newVal;
+    }
+  }
+
+  if (!isNil(desaturate)) {
+    const newVal = hsl.s - desaturate;
+    if (newVal < 0) {
+      hsl.s = 0;
+    } else if (newVal > 100) {
+      hsl.s = 100;
+    } else {
+      hsl.s = newVal;
+    }
+  }
+
+  if (!isNil(adjust_hue)) {
+    const newVal = hsl.h + adjust_hue;
+    if (newVal < -360) {
+      hsl.h = newVal + 360;
+    } else if (newVal > 360) {
+      hsl.h = newVal - 360;
+    } else {
+      hsl.h = newVal;
+    }
+  }
+
+  return hsl2hex(hsl);
+}
+
+/**
+ * Get code of active Sass functions
+ *
+ * @param {SassMeState} - Object of key/value pairs indicating which sass funcs are active
+ * @return {String} - Code for active sass funcs, i.e. `saturate(darken(#123456, 12), 12)`
+ */
+export function getCode(SassMeState) {
+  const {hex} = SassMeState;
+
+  let funcs = Object.keys(SassMeState).map(key => {
+    if (key !== 'hex' && !isNil(SassMeState[key])) {
+      return {
+        [key]: SassMeState[key]
+      }
+    } else {
+      return false;
+    }
+  }).filter(item => item ? true : false);
+
+  return funcs.length > 0
+    ? reduce(funcs, (accum, func) => {
+        const key = Object.keys(func);
+        return `${key}(${accum}, ${Math.round(func[key])})`;
+      }, '#' + hex)
+    : '';
 }
