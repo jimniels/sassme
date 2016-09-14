@@ -13,14 +13,13 @@
   font-size: 14px;
 
   &:before {
-    content: 'DEV ONLY: COLOR FUNCTION TESTS';
+    content: 'Color Function Tests (For Development Only)';
     text-align: center;
     display: block;
-    background: #09B29F;
+    background: $colorSecondary;
     margin: -20px;
     margin-bottom: 15px;
     padding: 6px;
-    color: white;
   }
 
   table {

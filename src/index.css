@@ -47,6 +47,48 @@ table {
 
 /**
  *
+ * Header
+ *
+ *
+ */
+.header {
+  clear: both;
+  padding: 13px 0 15px;
+  width: 100%;
+  overflow: auto;
+  color: #808C99; }
+
+.headerLogo {
+  float: left;
+  width: 168px;
+  height: 72px;
+  overflow: visible;
+  background: url(./img/sassme-logo.svg) 0 0 no-repeat;
+  text-indent: -999px;
+  margin-right: 20px; }
+
+.headerTagline {
+  float: left;
+  width: 40%;
+  padding-top: 20px;
+  position: relative; }
+  @media screen and (max-width: 565px) {
+    .headerTagline {
+      width: 100px; } }
+
+.headerTaglin p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 1em;
+  line-height: 1.3em; }
+  @media screen and (max-width: 565px) {
+    .headerTaglin p {
+      font-size: 0.75em;
+      line-height: 1.1em; } }
+
+/**
+ *
  * Sass Tests
  * Using the data object defined in the <SassTest /> component, we will
  * output a class for each that will display Sass's calculated version of each
@@ -69,14 +111,13 @@ table {
    * adjust_hue: 345
    */ }
   #sassTests:before {
-    content: 'DEV ONLY: COLOR FUNCTION TESTS';
+    content: 'Color Function Tests (For Development Only)';
     text-align: center;
     display: block;
-    background: #09B29F;
+    background: #D2E1DD;
     margin: -20px;
     margin-bottom: 15px;
-    padding: 6px;
-    color: white; }
+    padding: 6px; }
   #sassTests table {
     width: 100%;
     text-align: left; }
@@ -93,15 +134,15 @@ table {
   #sassTests .test-482934:before {
     content: "#650c42"; }
 
+/**
+ * Page & Structural Styles
+ */
 html {
   box-sizing: border-box; }
 
 *, *:before, *:after {
   box-sizing: inherit; }
 
-/**
- * Page & Structural Styles
- */
 body {
   padding: 0 20px;
   margin: 0;
@@ -119,11 +160,10 @@ body {
 
 .card {
   clear: both;
-  background: #fdfdfd;
+  background: #fff;
   overflow: hidden;
   margin-bottom: 40px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.06), 0 10px 10px rgba(0, 0, 0, 0.03);
-  border: 1px solid #eeeeee;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08), 0 10px 10px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.03);
   border-radius: 10px; }
   @media screen and (max-width: 565px) {
     .card {
@@ -132,11 +172,11 @@ body {
 a,
 a:link,
 a:visited {
-  color: #ce4ec6;
+  color: #CC6699;
   text-decoration: none; }
 
 a:hover {
-  color: #671c62;
+  color: #bf4080;
   text-decoration: underline; }
 
 /**
@@ -191,49 +231,6 @@ input[type='range']::-webkit-slider-thumb {
   background: transparent url(./img/range-handle@2x.png) no-repeat;
   background-size: 20px 20px; }
 
-/* PAGE HEADER
- SassMe page title styles
-*/
-#header {
-  clear: both;
-  padding: 20px 0;
-  width: 100%;
-  overflow: auto; }
-
-#header h1 {
-  float: left;
-  width: 230px;
-  height: 53px;
-  overflow: visible;
-  background: url(./img/sass-me-logo@2x.png) 0 0 no-repeat;
-  background-size: 230px 53px;
-  text-indent: -999px;
-  margin: 0 20px 0 15px; }
-
-#header #tagline {
-  float: left;
-  margin-top: 53px;
-  width: 50%;
-  position: relative; }
-
-@media screen and (max-width: 565px) {
-  #header #tagline {
-    width: 100px; } }
-
-#header #tagline p {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  font-size: 1em;
-  line-height: 1.3em;
-  color: #777777;
-  text-shadow: 0 1px 0 white; }
-
-@media screen and (max-width: 565px) {
-  #header #tagline p {
-    font-size: 0.75em;
-    line-height: 1.1em; } }
-
 /* LIST ITEMS
  Styles for each <li> item
 */
@@ -265,7 +262,7 @@ input[type='range']::-webkit-slider-thumb {
   font-size: 0.625em; }
 
 .focus label, .focus #help {
-  color: #ce4ec6; }
+  color: #CC6699; }
 
 .focus #help {
   opacity: 1; }
@@ -283,11 +280,11 @@ input[type='range']::-webkit-slider-thumb {
  Styles for the main content swatches
 */
 #colorIn {
-  width: 47%;
+  width: 48%;
   opacity: 1; }
 
 #colorOut {
-  width: 53%; }
+  width: 52%; }
 
 .swatch {
   color: #fff;
@@ -353,7 +350,8 @@ input[name*="hexColor"] {
   width: 100%;
   font-family: 'Droid Sans Mono', Courier, monospace;
   position: relative;
-  z-index: 500; }
+  z-index: 500;
+  text-transform: uppercase; }
   input[name*="hexColor"]:focus {
     outline: none; }
 
@@ -362,8 +360,8 @@ input[name='hexColorIn'] {
   color: rgba(0, 0, 0, 0.87);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.075); }
   input[name='hexColorIn']:focus {
-    border: 1px solid #ce4ec6;
-    box-shadow: 0 0 8px rgba(206, 78, 198, 0.6); }
+    border: 1px solid #CC6699;
+    box-shadow: 0 0 8px rgba(204, 102, 153, 0.6); }
 
 input[name='hexColorOut'] {
   background: rgba(0, 0, 0, 0.4);
@@ -441,17 +439,17 @@ input[name='hexColorOut'] {
 
 #codeOutput input::-webkit-input-placeholder {
   font-family: 'Droid Sans', Arial, sans-serif;
-  color: #ce4ec6; }
+  color: #CC6699; }
 
 #codeOutput input:-moz-placeholder {
   font-family: 'Droid Sans', Arial, sans-serif;
-  color: #ce4ec6; }
+  color: #CC6699; }
 
 #codeOutput input:hover {
-  color: #ce4ec6; }
+  color: #CC6699; }
 
 #codeOutput input:focus {
-  background: #ce4ec6;
+  background: #CC6699;
   color: #fff; }
 
 #initialHelp {
@@ -464,7 +462,7 @@ input[name='hexColorOut'] {
   font-size: 0.875em;
   line-height: 4em;
   width: 400px;
-  color: #ce4ec6;
+  color: #CC6699;
   z-index: 400; }
 
 /* FOOTER

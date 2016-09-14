@@ -1,5 +1,16 @@
+// http://sass-lang.com/styleguide/code
+$colorPrimary: #CC6699;
+$colorSecondary: #D2E1DD;
+$colorGray: #808C99;
+
 @import './_reset.scss';
+@import './_header.scss';
 @import './_sassTests.scss';
+
+
+/**
+ * Page & Structural Styles
+ */
 
 html {
   box-sizing: border-box;
@@ -9,10 +20,6 @@ html {
   box-sizing: inherit;
 }
 
-/**
- * Page & Structural Styles
- */
-
 body {
   padding: 0 20px;
   margin: 0;
@@ -20,7 +27,6 @@ body {
   color: #333;
   background: #eeeeee url(./img/background.png);
   background-size: 400px 300px;
-  //border-top: 3px solid #ce4ec6;
 
   @media screen and (max-width: 565px) {
     padding: 0;
@@ -34,11 +40,12 @@ body {
 
 .card {
   clear: both;
-  background: #fdfdfd;
+  background: #fff;
   overflow: hidden;
   margin-bottom: 40px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.06), 0 10px 10px rgba(0,0,0,0.03);;
-  border: 1px solid #eeeeee;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.08),
+              0 10px 10px rgba(0,0,0,0.04),
+              0 0 0 1px rgba(0,0,0,0.03);
   border-radius: 10px;
 
   @media screen and (max-width: 565px) {
@@ -49,12 +56,12 @@ body {
 a,
 a:link,
 a:visited {
-  color: #ce4ec6;
+  color: $colorPrimary;
   text-decoration: none;
 }
 
 a:hover {
-  color: #671c62;
+  color: darken($colorPrimary, 10%);
   text-decoration: underline;
 }
 
@@ -74,15 +81,6 @@ input[type='range'] { -webkit-appearance: none; background-color: #ddd; border-t
 
 input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 100; position: relative; top: 0px; width: 20px; height: 20px; cursor: pointer; outline: none; background-repeat: no-repeat; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: transparent url(./img/range-handle@2x.png) no-repeat; background-size: 20px 20px; }
 
-/* PAGE HEADER
- SassMe page title styles
-*/
-#header { clear: both; padding: 20px 0; width: 100%; overflow: auto; }
-#header h1 { float: left; width: 230px; height: 53px; overflow: visible; background: url(./img/sass-me-logo@2x.png) 0 0 no-repeat; background-size: 230px 53px; text-indent: -999px; margin: 0 20px 0 15px; }
-#header #tagline { float: left; margin-top: 53px; width: 50%; position: relative; }
-@media screen and (max-width: 565px) { #header #tagline { width: 100px; } }
-#header #tagline p { position: absolute; bottom: 0; left: 0; font-size: 1em; line-height: 1.3em; color: #777777; text-shadow: 0 1px 0 white; }
-@media screen and (max-width: 565px) { #header #tagline p { font-size: 0.75em; line-height: 1.1em; } }
 
 /* LIST ITEMS
  Styles for each <li> item
@@ -93,7 +91,7 @@ input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 1
 .listItem.slider label { font-size: 0.625em; }
 .listItem.slider a { position: absolute; right: 3%; top: -7px; font-size: 0.625em; }
 
-.focus label, .focus #help { color: #ce4ec6; }
+.focus label, .focus #help { color: $colorPrimary; }
 .focus #help { opacity: 1; }
 
 .inactive .listItem { opacity: .15; }
@@ -105,11 +103,11 @@ input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 1
 */
 
 #colorIn {
-  width: 47%;
+  width: 48%;
   opacity: 1;
 }
 #colorOut {
-  width: 53%;
+  width: 52%;
 }
 
 .swatch {
@@ -190,6 +188,7 @@ input {
     font-family: 'Droid Sans Mono', Courier, monospace;
     position: relative;
     z-index: 500;
+    text-transform: uppercase;
 
     &:focus {
       outline: none;
@@ -202,8 +201,8 @@ input {
     box-shadow: inset 0 0 3px rgba(0,0,0,.075);
 
     &:focus {
-      border: 1px solid #ce4ec6;
-      box-shadow: 0 0 8px rgba(206, 78, 198, 0.6);
+      border: 1px solid $colorPrimary;
+      box-shadow: 0 0 8px rgba($colorPrimary, 0.6);
     }
   }
 
@@ -241,12 +240,12 @@ input {
 
 #codeOutput { clear: both; border-top: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4; }
 #codeOutput input { font-family: 'Droid Sans Mono', Courier, monospace; padding: 14px 0; margin: 0; font-size: 0.875em; width: 100%; background: #eaeaea; cursor: pointer; outline: none; text-align: center; border: none; }
-#codeOutput input::-webkit-input-placeholder { font-family: 'Droid Sans', Arial, sans-serif; color: #ce4ec6; }
-#codeOutput input:-moz-placeholder { font-family: 'Droid Sans', Arial, sans-serif; color: #ce4ec6; }
-#codeOutput input:hover { color: #ce4ec6; }
-#codeOutput input:focus { background: #ce4ec6; color: #fff; }
+#codeOutput input::-webkit-input-placeholder { font-family: 'Droid Sans', Arial, sans-serif; color: $colorPrimary; }
+#codeOutput input:-moz-placeholder { font-family: 'Droid Sans', Arial, sans-serif; color: $colorPrimary; }
+#codeOutput input:hover { color: $colorPrimary; }
+#codeOutput input:focus { background: $colorPrimary; color: #fff; }
 
-#initialHelp { opacity: 1; font-family: "Droid Sans", Helvetica, Arial; position: absolute; left: 45%; top: 40%; color: #777777; font-size: 0.875em; line-height: 4em; width: 400px; color: #ce4ec6; z-index: 400; }
+#initialHelp { opacity: 1; font-family: "Droid Sans", Helvetica, Arial; position: absolute; left: 45%; top: 40%; color: #777777; font-size: 0.875em; line-height: 4em; width: 400px; color: $colorPrimary; z-index: 400; }
 
 /* FOOTER
 

@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {isNil, teamplate, toString, reduce, pickBy, pick} from 'lodash';
-import {hex2hsl, hsl2hex} from '../utils/colorConversions';
 import {getCode, transformHex} from '../utils/colorTransforms';
 import Header from './Header';
 import SassTests from './SassTests';

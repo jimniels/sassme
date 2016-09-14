@@ -1,0 +1,48 @@
+/**
+ *
+ * Header
+ *
+ *
+ */
+
+.header {
+  clear: both;
+  padding: 13px 0 15px;
+  width: 100%;
+  overflow: auto;
+  color: $colorGray;
+}
+
+.headerLogo {
+  float: left;
+  width: 168px;
+  height: 72px;
+  overflow: visible;
+  background: url(./img/sassme-logo.svg) 0 0 no-repeat;
+  text-indent: -999px;
+  margin-right: 20px;
+}
+
+.headerTagline {
+  float: left;
+  width: 40%;
+  padding-top: 20px;
+  position: relative;
+
+  @media screen and (max-width: 565px) {
+    width: 100px;
+  }
+}
+
+.headerTaglin p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 1em;
+  line-height: 1.3em;
+
+  @media screen and (max-width: 565px) {
+    font-size: 0.75em;
+    line-height: 1.1em;
+  }
+}
