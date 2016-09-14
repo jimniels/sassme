@@ -20,7 +20,7 @@ const TESTS = [
 export default class SassTests extends Component {
   render() {
     return (
-      <div id='sassTests'>
+      <div id='sassTests' className='card wrapper'>
         <table>
           <thead>
             <tr>

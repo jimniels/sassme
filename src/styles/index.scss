@@ -1,7 +1,6 @@
 @import './_reset.scss';
 @import './_sassTests.scss';
 
-
 html {
   box-sizing: border-box;
 }
@@ -10,9 +9,9 @@ html {
   box-sizing: inherit;
 }
 
-/* PAGE & STRUCTURAL STYLES
- General page and structural styles
-*/
+/**
+ * Page & Structural Styles
+ */
 
 body {
   padding: 0 20px;
@@ -21,35 +20,47 @@ body {
   color: #333;
   background: #eeeeee url(./img/background.png);
   background-size: 400px 300px;
-  border-top: 3px solid #ce4ec6;
+  //border-top: 3px solid #ce4ec6;
 
   @media screen and (max-width: 565px) {
     padding: 0;
   }
 }
 
+.wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+}
 
-.wrapper { max-width: 850px; width: 850px\9; margin: 0 auto; }
+.card {
+  clear: both;
+  background: #fdfdfd;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.06), 0 10px 10px rgba(0,0,0,0.03);;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
 
-#container { clear: both; background: #fdfdfd; overflow: hidden; margin-bottom: 10px; -webkit-box-shadow: #dedede 0 3px 0; -moz-box-shadow: #dedede 0 3px 0; box-shadow: #dedede 0 3px 0; border: 1px solid #eeeeee; }
-@media screen and (max-width: 565px) { #container { padding: 0; } }
+  @media screen and (max-width: 565px) {
+    padding: 0;
+  }
+}
 
-a, a:link, a:visited { color: #ce4ec6; text-decoration: none; }
+a,
+a:link,
+a:visited {
+  color: #ce4ec6;
+  text-decoration: none;
+}
 
-a:hover { color: #671c62; text-decoration: underline; }
+a:hover {
+  color: #671c62;
+  text-decoration: underline;
+}
 
-/* INPUT ELEMENTS
- Page styles for input elements
-
-*/
-label { color: #777777; padding-top: 5px; display: block; text-transform: uppercase; letter-spacing: .15em; }
-
-input#color { border: 1px solid #e0e0e0; border-bottom-color: #e5e5e5; color: #333333; box-shadow: inset 0 1px 2px #eee; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; padding-left: 2em; font-size: 1em; height: 44px; width: 100%; font-family: 'Droid Sans Mono', Courier, monospace; position: relative; z-index: 500; }
-input#color::-webkit-input-placeholder { color: #cccccc; }
-input#color:-moz-placeholder { color: #cccccc; }
-input#color:focus { outline: none; border: 1px solid #ce4ec6; box-shadow: 0 0 8px rgba(206, 78, 198, 0.6); }
-
-label[for="color"] { position: absolute; padding: 0 0 0 1.4em; color: #cccccc; z-index: 501; }
+/**
+ * Form and Input Elements
+ */
 
 .fakeSlider { margin: 0 auto; width: 80%; }
 
@@ -92,21 +103,136 @@ input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 1
 /* SWATCHES
  Styles for the main content swatches
 */
-@media only screen and (min-width: 565px) { #swatch1 .swatch { -moz-border-radius-topleft: 10px; -webkit-border-top-left-radius: 10px; border-top-left-radius: 10px; }
-  #swatch2 .swatch { -moz-border-radius-topright: 10px; -webkit-border-top-right-radius: 10px; border-top-right-radius: 10px; }
-  #container { -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px; border-radius: 10px; } }
-.swatchPointer {
-  width: 0; height: 0; border-top: 150px solid transparent; border-bottom: 150px solid transparent; border-left: 40px solid transparent; position: absolute; z-index: 10; top: 0px; right: -40px;
+
+#colorIn {
+  width: 47%;
+  opacity: 1;
+}
+#colorOut {
+  width: 53%;
 }
 
-.swatchContainer { color: #fff; float: left; position: relative; }
-.swatchContainer#swatch1 { width: 47%; }
-.swatchContainer#swatch2 { width: 53%; }
-.swatchContainer .swatch { height: 300px; line-height: 300px; width: 100%; font-size: 1.125em; font-family: 'Droid Sans Mono', Courier, monospace; }
-.swatchContainer #colorInput { position: relative; width: 130px; margin: 0 auto; }
-.swatchContainer #colorOutput { opacity: 1; width: 130px; background: rgba(0, 0, 0, 0.4); padding: 10px 20px; border: 0px solid #000; color: #fff; position: relative; z-index: 500; -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; -webkit-box-shadow: inset black 0 0 4px; -moz-box-shadow: inset black 0 0 4px; box-shadow: inset black 0 0 4px; }
-.swatchContainer #colorOutput:before {content: '#'}
-.swatchContainer .swatchLabel { position: absolute; width: 100%; display: none; padding: 20px 0; color: #777777; text-align: center; text-transform: uppercase; letter-spacing: .1em; font-size: 0.625em; }
+.swatch {
+  color: #fff;
+  float: left;
+  position: relative;
+}
+
+.swatchLabel {
+  position: absolute;
+  width: 100%;
+  display: none;
+  padding: 20px 0;
+  color: #777777;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 0.625em;
+
+  .active & {
+    display: block;
+  }
+}
+
+.swatchColor {
+  height: 300px;
+  line-height: 300px;
+  width: 100%;
+  font-size: 1.125em;
+  font-family: 'Droid Sans Mono', Courier, monospace;
+}
+
+.swatchColorValue {
+  position: relative;
+  width: 130px;
+  margin: 0 auto;
+}
+
+.swatchColorPointer {
+  width: 0;
+  height: 0;
+  border-top: 150px solid transparent;
+  border-bottom: 150px solid transparent;
+  border-left: 40px solid transparent;
+  position: absolute;
+  z-index: 10;
+  top: 0px;
+  right: -40px;
+}
+
+label{
+  &[for*='hexColor'] {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    position: absolute;
+    padding: 0 0 0 1.3em;
+    z-index: 501;
+  }
+
+  &[for='hexColorIn'] {
+    color: rgba(0,0,0,.325);
+  }
+
+  &[for='hexColorOut'] {
+    color: rgba(255,255,255,.325);
+  }
+}
+
+input {
+  &[name*="hexColor"] {
+    border: 0;
+    border-radius: 3px;
+    padding-left: 2em;
+    font-size: 1em;
+    height: 44px;
+    width: 100%;
+    font-family: 'Droid Sans Mono', Courier, monospace;
+    position: relative;
+    z-index: 500;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &[name='hexColorIn'] {
+    border: 1px solid #e0e0e0;
+    color: rgba(0,0,0,.87);
+    box-shadow: inset 0 0 3px rgba(0,0,0,.075);
+
+    &:focus {
+      border: 1px solid #ce4ec6;
+      box-shadow: 0 0 8px rgba(206, 78, 198, 0.6);
+    }
+  }
+
+  &[name='hexColorOut'] {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+}
+
+//input#color::-webkit-input-placeholder { color: #cccccc; }
+//input#color:-moz-placeholder { color: #cccccc; }
+
+@media only screen and (min-width: 565px) {
+  #swatch1 .swatch { -moz-border-radius-topleft: 10px; -webkit-border-top-left-radius: 10px; border-top-left-radius: 10px; }
+  #swatch2 .swatch { -moz-border-radius-topright: 10px; -webkit-border-top-right-radius: 10px; border-top-right-radius: 10px; }
+  #container { -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px; border-radius: 10px; } }
+
+
+.swatchContainer #colorInput {  }
+.swatchContainer #colorOutput {
+  opacity: 1;
+  width: 130px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border: 0px solid #000; color: #fff;
+  position: relative;
+  z-index: 500;
+  border-radius: 3px;
+  box-shadow: inset black 0 0 4px; }
 
 /* INDIVIDUAL ELEMENTS
  Styles for individual elements on the page

@@ -9,12 +9,38 @@
  */
 
 #sassTests {
+  padding: 20px;
+  font-size: 14px;
+
+  &:before {
+    content: 'DEV ONLY: COLOR FUNCTION TESTS';
+    text-align: center;
+    display: block;
+    background: #09B29F;
+    margin: -20px;
+    margin-bottom: 15px;
+    padding: 6px;
+    color: white;
+  }
+
   table {
     width: 100%;
     text-align: left;
 
     th {
       font-weight: bold;
+    }
+
+    tr {
+      border-bottom: 1px solid rgba(0,0,0,.075);
+    }
+
+    tbody tr:last-child {
+      border: 0;
+    }
+
+    td, th {
+      padding: 7px 0;
     }
   }
 

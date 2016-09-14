@@ -14,6 +14,7 @@
   "scripts": {
     "css:watch": "./node_modules/node-sass/bin/node-sass -w src/styles/index.scss src/index.css",
     "css:build": "./node_modules/node-sass/bin/node-sass src/styles/index.scss src/index.css",
+    "prestart": "npm run css:build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

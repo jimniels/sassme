@@ -80,6 +80,11 @@ export default class App extends Component {
     this.setState(newState);
   }
 
+  handleOutputHexClick = (e) => {
+    const val = e.target.value;
+    e.target.setSelectionRange(0, val.length);
+  }
+
   render() {
     const {hex, lighten, darken, saturate, desaturate, adjust_hue} = this.state;
 
@@ -114,24 +119,23 @@ export default class App extends Component {
       <div>
         <Header />
 
-        <section id='container' className='wrapper'>
+        <section id='main' className='wrapper card'>
           <form
             action=''
             method='get'
             acceptCharset='utf-8'
             className={formClass}>
             <ul id='content'>
-              <li id='swatch1' className='listItem swatchContainer'>
+              <li id='colorIn' className='listItem swatch'>
                 <p className='swatchLabel'>Input color</p>
-                <div className='swatch' style={swatch1bg}>
-                  <div id='colorInput'>
-                    <label htmlFor='color'>
+                <div className='swatchColor' style={swatch1bg}>
+                  <div className='swatchColorValue'>
+                    <label htmlFor='hexColorIn'>
                       #
                     </label>
                     <input
                       type='text'
-                      name='color'
-                      id='color'
+                      name='hexColorIn'
                       maxLength='6'
                       placeholder='0183B7'
                       autoFocus={true}
@@ -142,15 +146,26 @@ export default class App extends Component {
                       &larr; Go ahead, give us a hex code
                     </div>
                   </div>
-                  <div className='swatchPointer' style={swatchPointerBorder}></div>
+                  <div className='swatchColorPointer' style={swatchPointerBorder}></div>
                 </div>
               </li>
 
-              <li id='swatch2' className='listItem swatchContainer'>
+              <li id='colorOut' className='listItem swatch'>
                 <p className='swatchLabel'>Output color</p>
-                <div className='swatch' style={swatch2bg}>
+                <div className='swatchColor' style={swatch2bg}>
                   {hexIsValid &&
-                    <span id='colorOutput'>{outputHex}</span>}
+                    <div className='swatchColorValue'>
+                      <label htmlFor='hexColorOut'>
+                        #
+                      </label>
+                      <input
+                       type='text'
+                       name='hexColorOut'
+                       value={outputHex}
+                       readOnly
+                       onClick={this.handleOutputHexClick}
+                      />
+                    </div>}
                 </div>
               </li>
 
