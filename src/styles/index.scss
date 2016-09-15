@@ -33,27 +33,6 @@ body {
   }
 }
 
-.wrapper {
-  max-width: 850px;
-  margin: 0 auto;
-}
-
-.card {
-  clear: both;
-  background: #fff;
-  overflow: hidden;
-  margin-bottom: 40px;
-  box-shadow: 0 15px 35px rgba(0,0,0,.07),
-              0 5px 15px rgba(0,0,0,.07),
-              0 0 0 1px rgba(0,0,0,0.03);
-  border-radius: 10px;
-
-  @media screen and (max-width: 565px) {
-    padding: 0;
-    border-radius: 0;
-  }
-}
-
 a,
 a:link,
 a:visited {
@@ -66,26 +45,32 @@ a:hover {
   text-decoration: underline;
 }
 
+.wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.card {
+  clear: both;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.07),
+              0 5px 15px rgba(0,0,0,.07),
+              0 0 0 1px rgba(0,0,0,.03);
+  border-radius: 10px;
+
+  @media screen and (max-width: 565px) {
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+
 /**
- * Form and Input Elements
+ * List Items
  */
 
-.fakeSlider { margin: 0 auto; width: 80%; }
-
-.ui-slider { position: relative; }
-
-.ui-widget-content { border-top: 2px solid #C5C5C5; border-bottom: 2px solid #C5C5C5; height: 0px; }
-
-.ui-slider-handle { background: transparent url(./img/range-handle@2x.png) no-repeat; background-size: 20px 20px; position: absolute; z-index: 10; bottom: -9px; margin-top: -3px; width: 20px; height: 20px; margin-left: -1%; cursor: pointer; outline: none; }
-
-input[type='range'] { -webkit-appearance: none; background-color: #ddd; border-top: 1px solid #aaa; border-bottom: 1px solid #eee; height: 8px; border-radius: 6px; }
-
-input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 100; position: relative; top: 0px; width: 20px; height: 20px; cursor: pointer; outline: none; background-repeat: no-repeat; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: transparent url(./img/range-handle@2x.png) no-repeat; background-size: 20px 20px; }
-
-
-/* LIST ITEMS
- Styles for each <li> item
-*/
 .listItem {
   text-align: center;
   position: relative;
@@ -116,15 +101,17 @@ input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 1
 }
 
 
-/* SWATCHES
- Styles for the main content swatches
-*/
+/**
+ * Swatches
+ * These relate to the input and output colors
+ */
 
-#colorIn {
+#swatchInput {
   width: 48%;
   opacity: 1;
 }
-#colorOut {
+
+#swatchOutput {
   width: 52%;
 }
 
@@ -177,7 +164,7 @@ input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 1
 }
 
 label{
-  &[for*='hexColor'] {
+  &[for*='hex'] {
     display: block;
     text-transform: uppercase;
     letter-spacing: .15em;
@@ -186,17 +173,17 @@ label{
     z-index: 501;
   }
 
-  &[for='hexColorIn'] {
+  &[for='hexInput'] {
     color: rgba(0,0,0,.325);
   }
 
-  &[for='hexColorOut'] {
+  &[for='hexOutput'] {
     color: rgba(255,255,255,.325);
   }
 }
 
 input {
-  &[name*="hexColor"] {
+  &[name*='hex'] {
     border: 0;
     border-radius: 3px;
     padding-left: 2em;
@@ -213,7 +200,7 @@ input {
     }
   }
 
-  &[name='hexColorIn'] {
+  &[name='hexInput'] {
     border: 1px solid #e0e0e0;
     color: rgba(0,0,0,.87);
     box-shadow: inset 0 0 3px rgba(0,0,0,.075);
@@ -224,28 +211,30 @@ input {
     }
   }
 
-  &[name='hexColorOut'] {
+  &[name='hexOutput'] {
     background: rgba(0, 0, 0, 0.4);
     color: white;
     cursor: pointer;
   }
 }
 
-.swatchContainer #colorInput {  }
-.swatchContainer #colorOutput {
+.initialHelp {
   opacity: 1;
-  width: 130px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 10px 20px;
-  border: 0px solid #000; color: #fff;
-  position: relative;
-  z-index: 500;
-  border-radius: 3px;
-  box-shadow: inset black 0 0 4px; }
+  font-family: 'Droid Sans', Helvetica, Arial;
+  position: absolute;
+  left: 45%;
+  top: 40%;
+  color: #777777;
+  font-size: 0.875em;
+  line-height: 4em;
+  width: 400px;
+  color: $colorPrimary;
+  z-index: 400;
+}
 
-/* INDIVIDUAL ELEMENTS
- Styles for individual elements on the page
-*/
+/**
+ * Code Output
+ */
 
 .codeOutput {
   clear: both;
@@ -274,12 +263,44 @@ input {
   }
 }
 
+/**
+ * Input Sliders
+ * A custom appearance for sliders if webkit browser
+ */
+
+input[type='range'] {
+  -webkit-appearance: none;
+  background-color: #ddd;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #eee;
+  height: 8px;
+  border-radius: 6px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  z-index: 100;
+  position: relative;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  outline: none;
+  background-repeat: no-repeat;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  background: transparent url(./img/range-handle@2x.png) no-repeat;
+  background-size: 20px 20px;
+}
+
 @mixin leftArrow() {
   &:before {
     content: '\2190';
     margin-right: 5px;
   }
 }
+
 @mixin rightArrow() {
   &:after {
     content: '\2192';
@@ -320,18 +341,4 @@ input {
       }
     }
   }
-}
-
-.initialHelp {
-  opacity: 1;
-  font-family: "Droid Sans", Helvetica, Arial;
-  position: absolute;
-  left: 45%;
-  top: 40%;
-  color: #777777;
-  font-size: 0.875em;
-  line-height: 4em;
-  width: 400px;
-  color: $colorPrimary;
-  z-index: 400;
 }

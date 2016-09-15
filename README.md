@@ -2,7 +2,7 @@
 
 [image soon to be here...]
 
-Dynamically view the output of Sass color functions in the browser. The following Sass functions are available to manipulate:
+Dynamically view the output of Sass HSL color functions in the browser. The following Sass HSL functions are available for manipulation:
 
 - [`lighten()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#lighten-instance_method)
 - [`darken()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#darken-instance_method)
@@ -10,6 +10,15 @@ Dynamically view the output of Sass color functions in the browser. The followin
 - [`desaturate()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#desaturate-instance_method) (same as `grayscale()`)
 - [`adjust-hue()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#adjust_hue-instance_method)
 
+## Development
+
+Project is built with React and based on Facebook’s officially supported [react-create-app](https://github.com/facebookincubator/create-react-app) package.
+
+### Develop Locally
+
+To work on the app: `npm run start` (this will start the javascript development server using scripts from `react-create-app`)
+
+If you’re going to be editing the CSS, make sure you run `npm run css:watch` in another terminal window. This runs Sass, watches for CSS changes, and recompiles them to `src/index.css`. The `npm run start` will detect any changes to that file and recompile as necessary.
 
 ## About
 

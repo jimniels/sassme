@@ -116,6 +116,18 @@ table {
    * hex: '482934',
    * saturate: 52,
    * adjust_hue: 345
+   */
+  /**
+   *
+   * hex: 'CC6699',
+   * desaturate: 33,
+   * adjust_hue: -165
+   */
+  /**
+   * hex: '669999',
+   * darken: 40,
+   * saturate: 50,
+   * adjust_hue: 290
    */ }
   #sassTests:before {
     content: 'Color Function Tests (For Development Only)';
@@ -140,6 +152,10 @@ table {
     content: "#16d000"; }
   #sassTests .test-482934:before {
     content: "#650c42"; }
+  #sassTests .test-CC6699:before {
+    content: "#88aaa2"; }
+  #sassTests .test-669999:before {
+    content: "#0e2b08"; }
 
 /**
  * Page & Structural Styles
@@ -161,6 +177,16 @@ body {
     body {
       padding: 0; } }
 
+a,
+a:link,
+a:visited {
+  color: #CC6699;
+  text-decoration: none; }
+
+a:hover {
+  color: #bf4080;
+  text-decoration: underline; }
+
 .wrapper {
   max-width: 850px;
   margin: 0 auto; }
@@ -177,71 +203,9 @@ body {
       padding: 0;
       border-radius: 0; } }
 
-a,
-a:link,
-a:visited {
-  color: #CC6699;
-  text-decoration: none; }
-
-a:hover {
-  color: #bf4080;
-  text-decoration: underline; }
-
 /**
- * Form and Input Elements
+ * List Items
  */
-.fakeSlider {
-  margin: 0 auto;
-  width: 80%; }
-
-.ui-slider {
-  position: relative; }
-
-.ui-widget-content {
-  border-top: 2px solid #C5C5C5;
-  border-bottom: 2px solid #C5C5C5;
-  height: 0px; }
-
-.ui-slider-handle {
-  background: transparent url(./img/range-handle@2x.png) no-repeat;
-  background-size: 20px 20px;
-  position: absolute;
-  z-index: 10;
-  bottom: -9px;
-  margin-top: -3px;
-  width: 20px;
-  height: 20px;
-  margin-left: -1%;
-  cursor: pointer;
-  outline: none; }
-
-input[type='range'] {
-  -webkit-appearance: none;
-  background-color: #ddd;
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #eee;
-  height: 8px;
-  border-radius: 6px; }
-
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  z-index: 100;
-  position: relative;
-  top: 0px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  outline: none;
-  background-repeat: no-repeat;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  background: transparent url(./img/range-handle@2x.png) no-repeat;
-  background-size: 20px 20px; }
-
-/* LIST ITEMS
- Styles for each <li> item
-*/
 .listItem {
   text-align: center;
   position: relative;
@@ -262,14 +226,15 @@ input[type='range']::-webkit-slider-thumb {
       font-size: 0.625em;
       color: #CC6699; }
 
-/* SWATCHES
- Styles for the main content swatches
-*/
-#colorIn {
+/**
+ * Swatches
+ * These relate to the input and output colors
+ */
+#swatchInput {
   width: 48%;
   opacity: 1; }
 
-#colorOut {
+#swatchOutput {
   width: 52%; }
 
 .swatch {
@@ -313,7 +278,7 @@ input[type='range']::-webkit-slider-thumb {
   top: 0px;
   right: -40px; }
 
-label[for*='hexColor'] {
+label[for*='hex'] {
   display: block;
   text-transform: uppercase;
   letter-spacing: .15em;
@@ -321,13 +286,13 @@ label[for*='hexColor'] {
   padding: 0 0 0 1.3em;
   z-index: 501; }
 
-label[for='hexColorIn'] {
+label[for='hexInput'] {
   color: rgba(0, 0, 0, 0.325); }
 
-label[for='hexColorOut'] {
+label[for='hexOutput'] {
   color: rgba(255, 255, 255, 0.325); }
 
-input[name*="hexColor"] {
+input[name*='hex'] {
   border: 0;
   border-radius: 3px;
   padding-left: 2em;
@@ -338,37 +303,38 @@ input[name*="hexColor"] {
   position: relative;
   z-index: 500;
   text-transform: uppercase; }
-  input[name*="hexColor"]:focus {
+  input[name*='hex']:focus {
     outline: none; }
 
-input[name='hexColorIn'] {
+input[name='hexInput'] {
   border: 1px solid #e0e0e0;
   color: rgba(0, 0, 0, 0.87);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.075); }
-  input[name='hexColorIn']:focus {
+  input[name='hexInput']:focus {
     border: 1px solid #CC6699;
     box-shadow: 0 0 8px rgba(204, 102, 153, 0.6); }
 
-input[name='hexColorOut'] {
+input[name='hexOutput'] {
   background: rgba(0, 0, 0, 0.4);
   color: white;
   cursor: pointer; }
 
-.swatchContainer #colorOutput {
+.initialHelp {
   opacity: 1;
-  width: 130px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 10px 20px;
-  border: 0px solid #000;
-  color: #fff;
-  position: relative;
-  z-index: 500;
-  border-radius: 3px;
-  box-shadow: inset black 0 0 4px; }
+  font-family: 'Droid Sans', Helvetica, Arial;
+  position: absolute;
+  left: 45%;
+  top: 40%;
+  color: #777777;
+  font-size: 0.875em;
+  line-height: 4em;
+  width: 400px;
+  color: #CC6699;
+  z-index: 400; }
 
-/* INDIVIDUAL ELEMENTS
- Styles for individual elements on the page
-*/
+/**
+ * Code Output
+ */
 .codeOutput {
   clear: both;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -388,6 +354,34 @@ input[name='hexColorOut'] {
       color: #CC6699; }
     .codeOutput input:hover {
       color: #CC6699; }
+
+/**
+ * Input Sliders
+ * A custom appearance for sliders if webkit browser
+ */
+input[type='range'] {
+  -webkit-appearance: none;
+  background-color: #ddd;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #eee;
+  height: 8px;
+  border-radius: 6px; }
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  z-index: 100;
+  position: relative;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  outline: none;
+  background-repeat: no-repeat;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  background: transparent url(./img/range-handle@2x.png) no-repeat;
+  background-size: 20px 20px; }
 
 .sliderLabel {
   overflow: hidden;
@@ -420,16 +414,3 @@ input[name='hexColorOut'] {
     .sliderLabel[for='sliderLighten'] span:last-child:after, .sliderLabel[for='sliderSaturate'] span:last-child:after {
       content: '\2192';
       margin-left: 5px; }
-
-.initialHelp {
-  opacity: 1;
-  font-family: "Droid Sans", Helvetica, Arial;
-  position: absolute;
-  left: 45%;
-  top: 40%;
-  color: #777777;
-  font-size: 0.875em;
-  line-height: 4em;
-  width: 400px;
-  color: #CC6699;
-  z-index: 400; }

@@ -49,10 +49,8 @@
    * saturate: 15
    * adjust_hue: 300
    */
-  .test-019283 {
-    &:before {
-      content: '#{adjust_hue(saturate(lighten(#019283, 12), 15), 300)}';
-    }
+  .test-019283:before {
+    content: '#{adjust_hue(saturate(lighten(#019283, 12), 15), 300)}';
   }
 
   /**
@@ -60,9 +58,27 @@
    * saturate: 52,
    * adjust_hue: 345
    */
-  .test-482934 {
-    &:before {
-      content: '#{adjust_hue(saturate(#482934, 52), 345)}';
-    }
+  .test-482934:before {
+    content: '#{adjust_hue(saturate(#482934, 52), 345)}';
+  }
+
+  /**
+   *
+   * hex: 'CC6699',
+   * desaturate: 33,
+   * adjust_hue: -165
+   */
+  .test-CC6699:before {
+    content: '#{desaturate(adjust_hue(#CC6699, -165), 33)}';
+  }
+
+  /**
+   * hex: '669999',
+   * darken: 40,
+   * saturate: 50,
+   * adjust_hue: 290
+   */
+  .test-669999:before {
+    content: '#{adjust_hue(saturate(darken(#669999, 40), 50), 290)}';
   }
 }

@@ -5,11 +5,11 @@ export default class Header extends Component {
     return (
       <header className='header wrapper'>
     		<h1 className='headerLogo'>
-          Sass Me
+          SassMe
         </h1>
     		<div className='headerTagline'>
     			<p>
-            Visualize <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html" target="_blank">SASS color functions</a> in real-time without compiling. Brought to you by <a href='http://jim-nielsen.com/'>Jim</a> <a href='http://twitter.com/jimniels'>Nielsen</a>.
+            Visualize <a href='http://sass-lang.com/documentation/Sass/Script/Functions.html#hsl_functions' target='_blank'>Sass HSL color functions</a> in real-time without compiling. Brought to you by <a href='http://jim-nielsen.com/'>Jim</a> <a href='http://twitter.com/jimniels'>Nielsen</a>.
           </p>
     		</div>
     	</header>

@@ -22,6 +22,9 @@ ReactDOM.render(
  * if they exist and fall within their respective thresholds.This populates the
  * intial state of <App />
  *
+ * The SassMeState object type is used quite extensively throughout this app.
+ * Learn it. Love it.
+ *
  * @typedef {Object} SassMeState
  * @property {String} hex - Value, valid 6 character hexadecimal color
  * @property {number} lighten - Value [0 -> 100]

@@ -13,10 +13,23 @@ const TESTS = [
     hex: '482934',
     saturate: 52,
     adjust_hue: 345
+  },
+  {
+    hex: 'CC6699',
+    desaturate: 33,
+    adjust_hue: -165
+  },
+  {
+    hex: '669999',
+    darken: 40,
+    saturate: 50,
+    adjust_hue: 290
   }
 ];
 
-
+// This outputs a table of values based on color inputs, one calcuation done
+// in javascript, the other in Sass. This allows us to compare the two and see
+// if our math is correct.
 export default class SassTests extends Component {
   render() {
     return (

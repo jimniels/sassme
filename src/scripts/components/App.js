@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {isNil, toString} from 'lodash';
 import {getCode, transformHex} from '../utils/colorTransforms';
 import Header from './Header';
@@ -14,7 +14,7 @@ export default class App extends Component {
     };
   }
 
-  handleInputHex = (e) => {
+  handleHexInput = (e) => {
     // Strip out non-hexadecimal values
     let input = e.target.value.match(/[0-9A-Fa-f]/g);
     input = input ? input.join('') : '';
@@ -84,10 +84,7 @@ export default class App extends Component {
 
     const hexIsValid = hex.length === 6;
 
-    const swatchPointerBorder = hexIsValid ? {borderLeftColor: '#' + hex} : {};
-    const swatch1bg = hexIsValid ? {backgroundColor: '#' + hex} : {};
-
-    const outputHex = hexIsValid
+    const hexOutput = hexIsValid
       ? transformHex({
           hex,
           lighten,
@@ -97,15 +94,12 @@ export default class App extends Component {
           adjust_hue
         })
       : '';
+
     const outputCode = getCode(this.state);
-    const swatch2bg = hexIsValid ? {backgroundColor: '#' + outputHex} : {};
-    const formClass = hexIsValid ? 'active' : 'inactive';
-    const helpStyle = {display: hexIsValid ? 'none' : 'block'};
 
-
-    const inputLightnessValue = (!isNil(lighten) ? lighten : 0) - (!isNil(darken) ? darken : 0);
-    const inputSaturationValue = (!isNil(saturate) ? saturate : 0) - (!isNil(desaturate) ? desaturate : 0);
-    const inputHueValue = !isNil(adjust_hue) ? adjust_hue : '0';
+    const inputLightnessValue = toString((!isNil(lighten) ? lighten : 0) - (!isNil(darken) ? darken : 0));
+    const inputSaturationValue = toString((!isNil(saturate) ? saturate : 0) - (!isNil(desaturate) ? desaturate : 0));
+    const inputHueValue = toString(!isNil(adjust_hue) ? adjust_hue : '0');
 
     const isDev = process.env.NODE_ENV !== 'production' ? true : false;
 
@@ -118,49 +112,49 @@ export default class App extends Component {
             action=''
             method='get'
             acceptCharset='utf-8'
-            className={formClass}>
-
+            className={hexIsValid ? 'active' : 'inactive'}>
             <ul id='content'>
-              <li id='colorIn' className='listItem swatch'>
-                <div className='swatchColor' style={swatch1bg}>
+
+              <li id='swatchInput' className='listItem swatch'>
+                <div className='swatchColor' style={{backgroundColor: hexIsValid ? `#${hex}` : ''}}>
                   <div className='swatchColorValue'>
-                    <label htmlFor='hexColorIn'>
+                    <label htmlFor='hexInput'>
                       #
                     </label>
                     <input
                       type='text'
-                      name='hexColorIn'
+                      name='hexInput'
                       maxLength='6'
                       placeholder='0183B7'
                       autoFocus={true}
                       value={hex}
-                      onChange={this.handleInputHex}
+                      onChange={this.handleHexInput}
                     />
-                    <div className='initialHelp' style={helpStyle}>
+                    <div className='initialHelp' style={{display: hexIsValid ? 'none' : 'block'}}>
                       &larr; Go ahead, give us a hex code
                     </div>
                   </div>
-                  <div className='swatchColorPointer' style={swatchPointerBorder}></div>
+                  <div className='swatchColorPointer' style={{borderLeftColor: hexIsValid ? `#${hex}` : ''}}></div>
                 </div>
               </li>
 
-              <li id='colorOut' className='listItem swatch'>
-                <div className='swatchColor' style={swatch2bg}>
-                  {hexIsValid &&
+              {hexIsValid &&
+                <li id='swatchOutput' className='listItem swatch'>
+                  <div className='swatchColor' style={{backgroundColor: '#' + hexOutput}}>
                     <div className='swatchColorValue'>
-                      <label htmlFor='hexColorOut'>
+                      <label htmlFor='hexOutput'>
                         #
                       </label>
                       <input
                        type='text'
-                       name='hexColorOut'
-                       value={outputHex}
+                       name='hexOutput'
+                       value={hexOutput}
                        readOnly
                        onClick={this.handleCopyInputValue}
                       />
-                    </div>}
-                </div>
-              </li>
+                    </div>
+                  </div>
+                </li>}
 
               <li className='listItem'>
                 <div className='codeOutput'>
@@ -190,7 +184,7 @@ export default class App extends Component {
                   disabled={!hexIsValid}
                   id='sliderLighten'
                   onChange={this.handleInputSlider.bind(this, 'lighten')}
-                  value={toString(inputLightnessValue)}
+                  value={inputLightnessValue}
                 />
                 <label htmlFor='sliderLighten' className='sliderLabel'>
                   <span>darken</span>
@@ -211,7 +205,7 @@ export default class App extends Component {
                   disabled={!hexIsValid}
                   id='sliderSaturate'
                   onChange={this.handleInputSlider.bind(this, 'saturate')}
-                  value={toString(inputSaturationValue)}
+                  value={inputSaturationValue}
                 />
                 <label htmlFor='sliderSaturate' className='sliderLabel'>
                   <span>desaturate</span>
@@ -232,7 +226,7 @@ export default class App extends Component {
                   disabled={!hexIsValid}
                   id='sliderAdjustHue'
                   onChange={this.handleInputSlider.bind(this, 'adjust_hue')}
-                  value={toString(inputHueValue)}
+                  value={inputHueValue}
                 />
                 <label htmlFor='sliderAdjustHue' className='sliderLabel'>
                   adjust hue
