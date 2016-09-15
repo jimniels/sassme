@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {isNil, teamplate, toString, reduce, pickBy, pick} from 'lodash';
+import {isNil, toString} from 'lodash';
 import {getCode, transformHex} from '../utils/colorTransforms';
 import Header from './Header';
 import SassTests from './SassTests';
@@ -8,6 +8,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
+    // Initial state populated by props. Otherwise, `getDefaultState` is used.
     this.state = {
       ...props
     };
@@ -26,14 +27,6 @@ export default class App extends Component {
       saturate: undefined,
       desaturate: undefined,
       adjust_hue: undefined
-    });
-  }
-
-  handleLighten = (e) => {
-    const newVal = Number(e.target.value);
-    this.setState({
-      lighten: newVal >= 0 ? newVal : this.state.lighten,
-      darken: newVal >= 0 ? this.state.darken : Math.abs(newVal)
     });
   }
 
@@ -65,6 +58,7 @@ export default class App extends Component {
   }
 
   handleResetInputSlider = (stateKey) => {
+    console.log('test', stateKey);
     let newState = {};
     if (stateKey === 'lighten') {
       newState.lighten = undefined;
@@ -124,9 +118,9 @@ export default class App extends Component {
             method='get'
             acceptCharset='utf-8'
             className={formClass}>
+
             <ul id='content'>
               <li id='colorIn' className='listItem swatch'>
-                <p className='swatchLabel'>Input color</p>
                 <div className='swatchColor' style={swatch1bg}>
                   <div className='swatchColorValue'>
                     <label htmlFor='hexColorIn'>
@@ -150,7 +144,6 @@ export default class App extends Component {
               </li>
 
               <li id='colorOut' className='listItem swatch'>
-                <p className='swatchLabel'>Output color</p>
                 <div className='swatchColor' style={swatch2bg}>
                   {hexIsValid &&
                     <div className='swatchColorValue'>
@@ -185,8 +178,8 @@ export default class App extends Component {
               <li className='listItem slider'>
                 <a
                   href='#'
-                  className='reset'
-                  onClick={this.handleResetInputSlider.bind(this, 'lighten')}>
+                  onClick={this.handleResetInputSlider.bind(this, 'lighten')}
+                  style={{display: !isNil(lighten) || !isNil(darken) ? 'block' : 'none'}}>
                   Reset
                 </a>
                 <input
@@ -204,7 +197,12 @@ export default class App extends Component {
                 </label>
               </li>
               <li className='listItem slider'>
-                <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'saturate')}>Reset</a>
+                <a
+                  href='#'
+                  onClick={this.handleResetInputSlider.bind(this, 'saturate')}
+                  style={{display: !isNil(saturate) || !isNil(desaturate) ? 'block' : 'none'}}>
+                  Reset
+                </a>
                 <input
                   type='range'
                   min='-100'
@@ -220,7 +218,12 @@ export default class App extends Component {
                 </label>
               </li>
               <li className='listItem slider'>
-                <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'adjust_hue')}>Reset</a>
+                <a
+                  href='#'
+                  onClick={this.handleResetInputSlider.bind(this, 'adjust_hue')}
+                  style={{display: !isNil(adjust_hue) ? 'block' : 'none'}}>
+                  Reset
+                </a>
                 <input
                   type='range'
                   min='-360'

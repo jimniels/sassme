@@ -85,17 +85,35 @@ input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; z-index: 1
 /* LIST ITEMS
  Styles for each <li> item
 */
-.listItem { text-align: center; position: relative; opacity: 1; -webkit-transition: .5s all ease; -moz-transition: .5s all ease; -ms-transition: .5s all ease; -o-transition: .5s all ease; transition: .5s all ease; }
-.listItem.slider { margin: 25px 0; }
-.listItem.slider input { display: block; width: 80%; margin: 0 auto; }
-.listItem.slider a { position: absolute; right: 3%; top: -7px; font-size: 0.625em; }
+.listItem {
+  text-align: center;
+  position: relative;
+  opacity: 1;
+  transition: .5s all ease;
 
-.focus label, .focus #help { color: $colorPrimary; }
-.focus #help { opacity: 1; }
+  .inactive & {
+    opacity: .15;
+  }
 
-.inactive .listItem { opacity: .15; }
-.inactive .listItem#swatch1 { opacity: 1; }
-.inactive .listItem #colorOutput { opacity: 0; }
+  &.slider {
+    margin: 25px 0;
+
+    input[type='range'] {
+      display: block;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    a {
+      position: absolute;
+      right: 3%;
+      top: -7px;
+      font-size: 0.625em;
+      color: $colorPrimary;
+    }
+  }
+}
+
 
 /* SWATCHES
  Styles for the main content swatches
@@ -212,15 +230,6 @@ input {
   }
 }
 
-//input#color::-webkit-input-placeholder { color: #cccccc; }
-//input#color:-moz-placeholder { color: #cccccc; }
-
-@media only screen and (min-width: 565px) {
-  #swatch1 .swatch { -moz-border-radius-topleft: 10px; -webkit-border-top-left-radius: 10px; border-top-left-radius: 10px; }
-  #swatch2 .swatch { -moz-border-radius-topright: 10px; -webkit-border-top-right-radius: 10px; border-top-right-radius: 10px; }
-  #container { -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px; border-radius: 10px; } }
-
-
 .swatchContainer #colorInput {  }
 .swatchContainer #colorOutput {
   opacity: 1;
@@ -240,6 +249,7 @@ input {
 .codeOutput {
   clear: both;
   border-bottom: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0,0,0,.1);
 
   input {
     font-family: 'Droid Sans Mono', Courier, monospace;
