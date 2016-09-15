@@ -65,7 +65,7 @@ export default class App extends Component {
       newState.darken = undefined;
     } else if (stateKey === 'saturate') {
       newState.saturate = undefined;
-      newState.desatruate = undefined;
+      newState.desaturate = undefined;
     } else if (stateKey === 'adjust_hue') {
       newState.adjust_hue = undefined;
     }
