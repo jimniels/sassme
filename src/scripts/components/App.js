@@ -57,8 +57,8 @@ export default class App extends Component {
     this.setState(newState);
   }
 
-  handleResetInputSlider = (stateKey) => {
-    console.log('test', stateKey);
+  handleResetInputSlider = (stateKey, e) => {
+    e.preventDefault();
     let newState = {};
     if (stateKey === 'lighten') {
       newState.lighten = undefined;
@@ -74,7 +74,6 @@ export default class App extends Component {
   }
 
   handleCopyInputValue = (e) => {
-    e.preventDefault();
     const val = e.target.value;
     e.target.setSelectionRange(0, val.length);
   }
