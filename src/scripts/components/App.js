@@ -74,6 +74,7 @@ export default class App extends Component {
   }
 
   handleCopyInputValue = (e) => {
+    e.preventDefault();
     const val = e.target.value;
     e.target.setSelectionRange(0, val.length);
   }

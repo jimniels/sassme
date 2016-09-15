@@ -1,5 +1,6 @@
 {
-  "name": "sassme2",
+  "name": "sassme",
+  "homepage": "http://jim-nielsen.com/sassme",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {

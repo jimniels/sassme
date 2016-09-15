@@ -64,7 +64,12 @@ table {
   height: 72px;
   overflow: visible;
   background: url(./img/sassme-logo.svg) 0 0 no-repeat;
-  text-indent: -999px; }
+  text-indent: -9999px;
+  margin: 0; }
+  @media screen and (max-width: 565px) {
+    .headerLogo {
+      float: none;
+      margin: 0 auto; } }
 
 .headerTagline {
   padding-top: 22px;
@@ -73,7 +78,10 @@ table {
   margin-left: 190px; }
   @media screen and (max-width: 565px) {
     .headerTagline {
-      width: 100px; } }
+      width: 90%;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 10px; } }
 
 .headerTaglin p {
   position: absolute;
@@ -166,7 +174,8 @@ body {
   border-radius: 10px; }
   @media screen and (max-width: 565px) {
     .card {
-      padding: 0; } }
+      padding: 0;
+      border-radius: 0; } }
 
 a,
 a:link,

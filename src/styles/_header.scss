@@ -19,7 +19,13 @@
   height: 72px;
   overflow: visible;
   background: url(./img/sassme-logo.svg) 0 0 no-repeat;
-  text-indent: -999px;
+  text-indent: -9999px;
+  margin: 0;
+
+  @media screen and (max-width: 565px) {
+    float: none;
+    margin: 0 auto;
+  }
 }
 
 .headerTagline {
@@ -28,9 +34,11 @@
   max-width: 450px;
   margin-left: 190px;
 
-  // @TODO center
   @media screen and (max-width: 565px) {
-    width: 100px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10px;
   }
 }
 
