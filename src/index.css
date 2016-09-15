@@ -64,14 +64,13 @@ table {
   height: 72px;
   overflow: visible;
   background: url(./img/sassme-logo.svg) 0 0 no-repeat;
-  text-indent: -999px;
-  margin-right: 20px; }
+  text-indent: -999px; }
 
 .headerTagline {
-  float: left;
-  width: 40%;
-  padding-top: 20px;
-  position: relative; }
+  padding-top: 22px;
+  position: relative;
+  max-width: 450px;
+  margin-left: 190px; }
   @media screen and (max-width: 565px) {
     .headerTagline {
       width: 100px; } }
@@ -252,9 +251,6 @@ input[type='range']::-webkit-slider-thumb {
   width: 80%;
   margin: 0 auto; }
 
-.listItem.slider label {
-  font-size: 0.625em; }
-
 .listItem.slider a {
   position: absolute;
   right: 3%;
@@ -365,7 +361,8 @@ input[name='hexColorIn'] {
 
 input[name='hexColorOut'] {
   background: rgba(0, 0, 0, 0.4);
-  color: white; }
+  color: white;
+  cursor: pointer; }
 
 @media only screen and (min-width: 565px) {
   #swatch1 .swatch {
@@ -398,45 +395,58 @@ input[name='hexColorOut'] {
 /* INDIVIDUAL ELEMENTS
  Styles for individual elements on the page
 */
-.codeHelp {
-  background-color: white;
-  border: 1px solid #EBEBEB;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 -4px 6px;
-  color: #353535;
-  display: none;
-  left: 20%;
-  padding: .5em;
-  position: absolute;
-  text-align: center;
-  top: 260px;
-  z-index: 400;
-  width: 60%; }
-
-#codeOutput {
+.codeOutput {
   clear: both;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-  #codeOutput input {
+  .codeOutput input {
     font-family: 'Droid Sans Mono', Courier, monospace;
     padding: 14px 0;
     margin: 0;
-    font-size: 0.875em;
+    font-size: 1em;
     width: 100%;
     cursor: pointer;
     outline: none;
     text-align: center;
     border: none; }
-    #codeOutput input::-webkit-input-placeholder, #codeOutput input:-moz-placeholder {
+    .codeOutput input::placeholder {
       font-family: 'Droid Sans', Arial, sans-serif;
       color: #CC6699; }
-    #codeOutput input:hover {
+    .codeOutput input:hover {
       color: #CC6699; }
-    #codeOutput input:focus {
-      background: #CC6699;
-      color: #fff; }
 
-#initialHelp {
+.sliderLabel {
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
+  display: block; }
+  .sliderLabel[for='sliderAdjustHue'] {
+    text-align: center; }
+    .sliderLabel[for='sliderAdjustHue']:before {
+      content: '\2190';
+      margin-right: 5px; }
+    .sliderLabel[for='sliderAdjustHue']:after {
+      content: '\2192';
+      margin-left: 5px; }
+  .sliderLabel[for='sliderLighten'] span:first-child, .sliderLabel[for='sliderSaturate'] span:first-child {
+    float: left;
+    width: 50%;
+    padding-right: 15px;
+    text-align: right;
+    border-right: 1px solid rgba(0, 0, 0, 0.5); }
+    .sliderLabel[for='sliderLighten'] span:first-child:before, .sliderLabel[for='sliderSaturate'] span:first-child:before {
+      content: '\2190';
+      margin-right: 5px; }
+  .sliderLabel[for='sliderLighten'] span:last-child, .sliderLabel[for='sliderSaturate'] span:last-child {
+    float: right;
+    width: 50%;
+    padding-left: 15px;
+    text-align: left; }
+    .sliderLabel[for='sliderLighten'] span:last-child:after, .sliderLabel[for='sliderSaturate'] span:last-child:after {
+      content: '\2192';
+      margin-left: 5px; }
+
+.initialHelp {
   opacity: 1;
   font-family: "Droid Sans", Helvetica, Arial;
   position: absolute;
@@ -448,49 +458,3 @@ input[name='hexColorOut'] {
   width: 400px;
   color: #CC6699;
   z-index: 400; }
-
-/* FOOTER
-
-*/
-#footer {
-  font-size: 0.625em;
-  font-weight: bold;
-  line-height: 1.3em;
-  padding: 5px 5px;
-  color: #777777;
-  text-shadow: 0 1px 0 white;
-  clear: both; }
-
-#footer img {
-  margin: 0 10px;
-  position: relative; }
-
-#footer #arc90 {
-  float: left;
-  width: 50%; }
-
-#footer #arc90 img {
-  float: left;
-  width: 91px;
-  height: 35px;
-  top: -4px; }
-
-#footer #kindling {
-  text-align: right;
-  float: right;
-  width: 50%; }
-
-#footer #kindling img {
-  float: right;
-  width: 100px;
-  height: 35px;
-  top: -2px; }
-
-@media screen and (max-width: 565px) {
-  #footer div {
-    width: 50% !important;
-    border-bottom: 1px solid #ddd;
-    padding: 0 20px 10px; }
-  #footer img {
-    float: none !important;
-    margin: 0 0 !important; } }

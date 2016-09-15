@@ -79,7 +79,7 @@ export default class App extends Component {
     this.setState(newState);
   }
 
-  handleOutputHexClick = (e) => {
+  handleCopyInputValue = (e) => {
     const val = e.target.value;
     e.target.setSelectionRange(0, val.length);
   }
@@ -141,7 +141,7 @@ export default class App extends Component {
                       value={hex}
                       onChange={this.handleInputHex}
                     />
-                    <div id='initialHelp' style={helpStyle}>
+                    <div className='initialHelp' style={helpStyle}>
                       &larr; Go ahead, give us a hex code
                     </div>
                   </div>
@@ -162,25 +162,23 @@ export default class App extends Component {
                        name='hexColorOut'
                        value={outputHex}
                        readOnly
-                       onClick={this.handleOutputHexClick}
+                       onClick={this.handleCopyInputValue}
                       />
                     </div>}
                 </div>
               </li>
 
               <li className='listItem'>
-                <div id='codeOutput'>
+                <div className='codeOutput'>
                   <input
                     type='text'
                     id='code'
                     tabIndex='-1'
                     readOnly='readonly'
-                    placeholder='Fiddle with the sliders to get the SASS'
+                    placeholder='Adjust sliders, get Sass'
                     value={outputCode}
+                    onClick={this.handleCopyInputValue}
                   />
-                </div>
-                <div className='codeHelp'>
-                  <p>Copy and use the code below:</p>
                 </div>
               </li>
 
@@ -196,11 +194,14 @@ export default class App extends Component {
                   min='-100'
                   max='100'
                   disabled={!hexIsValid}
-                  id='slider_l'
+                  id='sliderLighten'
                   onChange={this.handleInputSlider.bind(this, 'lighten')}
                   value={toString(inputLightnessValue)}
                 />
-                <label htmlFor='slider_l'>&larr; darken | lighten &rarr;</label>
+                <label htmlFor='sliderLighten' className='sliderLabel'>
+                  <span>darken</span>
+                  <span>lighten</span>
+                </label>
               </li>
               <li className='listItem slider'>
                 <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'saturate')}>Reset</a>
@@ -209,11 +210,14 @@ export default class App extends Component {
                   min='-100'
                   max='100'
                   disabled={!hexIsValid}
-                  id='slider_s'
+                  id='sliderSaturate'
                   onChange={this.handleInputSlider.bind(this, 'saturate')}
                   value={toString(inputSaturationValue)}
                 />
-                <label htmlFor='slider_s'>&larr; desaturate | saturate &rarr;</label>
+                <label htmlFor='sliderSaturate' className='sliderLabel'>
+                  <span>desaturate</span>
+                  <span>saturate</span>
+                </label>
               </li>
               <li className='listItem slider'>
                 <a href='#' className='reset' onClick={this.handleResetInputSlider.bind(this, 'adjust_hue')}>Reset</a>
@@ -222,11 +226,13 @@ export default class App extends Component {
                   min='-360'
                   max='360'
                   disabled={!hexIsValid}
-                  id='slider_h'
+                  id='sliderAdjustHue'
                   onChange={this.handleInputSlider.bind(this, 'adjust_hue')}
                   value={toString(inputHueValue)}
                 />
-                <label htmlFor='slider_h'>&larr; adjust hue &rarr;</label>
+                <label htmlFor='sliderAdjustHue' className='sliderLabel'>
+                  adjust hue
+                </label>
               </li>
             </ul>
           </form>

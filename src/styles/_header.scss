@@ -20,15 +20,15 @@
   overflow: visible;
   background: url(./img/sassme-logo.svg) 0 0 no-repeat;
   text-indent: -999px;
-  margin-right: 20px;
 }
 
 .headerTagline {
-  float: left;
-  width: 40%;
-  padding-top: 20px;
+  padding-top: 22px;
   position: relative;
+  max-width: 450px;
+  margin-left: 190px;
 
+  // @TODO center
   @media screen and (max-width: 565px) {
     width: 100px;
   }

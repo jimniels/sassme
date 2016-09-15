@@ -9,7 +9,7 @@ export default class Header extends Component {
         </h1>
     		<div className='headerTagline'>
     			<p>
-            Visualize <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html" target="_blank">SASS color functions</a> in real-time without compiling.
+            Visualize <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html" target="_blank">SASS color functions</a> in real-time without compiling. Brought to you by <a href='http://jim-nielsen.com/'>Jim</a> <a href='http://twitter.com/jimniels'>Nielsen</a>.
           </p>
     		</div>
     	</header>
