@@ -1,0 +1,84 @@
+/**
+ *
+ * Sass Tests
+ * Using the data object defined in the <SassTest /> component, we will
+ * output a class for each that will display Sass's calculated version of each
+ * hex color. This allows us to easily compare, in the browser, how the JS
+ * transformed the HEX color vs. how Sass transformed it.
+ *
+ */
+
+#sassTests {
+  padding: 20px;
+  font-size: 14px;
+
+  &:before {
+    content: 'Color Function Tests (For Development Only)';
+    text-align: center;
+    display: block;
+    background: $colorSecondary;
+    margin: -20px;
+    margin-bottom: 15px;
+    padding: 6px;
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+
+    th {
+      font-weight: bold;
+    }
+
+    tr {
+      border-bottom: 1px solid rgba(0,0,0,.075);
+    }
+
+    tbody tr:last-child {
+      border: 0;
+    }
+
+    td, th {
+      padding: 7px 0;
+    }
+  }
+
+  /**
+   * hex: '019283'
+   * lighten: 12
+   * saturate: 15
+   * adjust_hue: 300
+   */
+  .test-019283:before {
+    content: '#{adjust_hue(saturate(lighten(#019283, 12), 15), 300)}';
+  }
+
+  /**
+   * hex: '482934',
+   * saturate: 52,
+   * adjust_hue: 345
+   */
+  .test-482934:before {
+    content: '#{adjust_hue(saturate(#482934, 52), 345)}';
+  }
+
+  /**
+   *
+   * hex: 'CC6699',
+   * desaturate: 33,
+   * adjust_hue: -165
+   */
+  .test-CC6699:before {
+    content: '#{desaturate(adjust_hue(#CC6699, -165), 33)}';
+  }
+
+  /**
+   * hex: '669999',
+   * darken: 40,
+   * saturate: 50,
+   * adjust_hue: 290
+   */
+  .test-669999:before {
+    content: '#{adjust_hue(saturate(darken(#669999, 40), 50), 290)}';
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "sassme",
+  "homepage": "http://jim-nielsen.com/sassme",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "lodash": "^4.15.0",
+    "node-sass": "^3.9.3",
+    "react-scripts": "0.4.1"
+  },
+  "dependencies": {
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
+  },
+  "scripts": {
+    "css:watch": "./node_modules/node-sass/bin/node-sass -w src/styles/index.scss src/index.css",
+    "css:build": "./node_modules/node-sass/bin/node-sass src/styles/index.scss src/index.css",
+    "prestart": "npm run css:build",
+    "start": "npm run css:watch & react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/react-scripts/config/eslint.js"
+  }
+}

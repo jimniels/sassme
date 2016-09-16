@@ -1,0 +1,344 @@
+// http://sass-lang.com/styleguide/code
+$colorPrimary: #CC6699;
+$colorSecondary: #D2E1DD;
+$colorGray: #808C99;
+
+@import './_reset.scss';
+@import './_header.scss';
+@import './_sassTests.scss';
+
+
+/**
+ * Page & Structural Styles
+ */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0 20px;
+  margin: 0;
+  font: 16px/1.4em 'Droid Sans', Arial, sans-serif;
+  color: #333;
+  background: #eeeeee url(./img/background.png);
+  background-size: 400px 300px;
+
+  @media screen and (max-width: 565px) {
+    padding: 0;
+  }
+}
+
+a,
+a:link,
+a:visited {
+  color: $colorPrimary;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darken($colorPrimary, 10%);
+  text-decoration: underline;
+}
+
+.wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.card {
+  clear: both;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.07),
+              0 5px 15px rgba(0,0,0,.07),
+              0 0 0 1px rgba(0,0,0,.03);
+  border-radius: 10px;
+
+  @media screen and (max-width: 565px) {
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+
+/**
+ * List Items
+ */
+
+.listItem {
+  text-align: center;
+  position: relative;
+  opacity: 1;
+  transition: .5s all ease;
+
+  .inactive & {
+    opacity: .15;
+  }
+
+  &.slider {
+    margin: 25px 0;
+
+    input[type='range'] {
+      display: block;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    a {
+      position: absolute;
+      right: 3%;
+      top: -7px;
+      font-size: 0.625em;
+      color: $colorPrimary;
+    }
+  }
+}
+
+
+/**
+ * Swatches
+ * These relate to the input and output colors
+ */
+
+#swatchInput {
+  width: 48%;
+  opacity: 1;
+}
+
+#swatchOutput {
+  width: 52%;
+}
+
+.swatch {
+  color: #fff;
+  float: left;
+  position: relative;
+}
+
+.swatchLabel {
+  position: absolute;
+  width: 100%;
+  display: none;
+  padding: 20px 0;
+  color: #777777;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: 0.625em;
+
+  .active & {
+    display: block;
+  }
+}
+
+.swatchColor {
+  height: 300px;
+  line-height: 300px;
+  width: 100%;
+  font-size: 1.125em;
+  font-family: 'Droid Sans Mono', Courier, monospace;
+}
+
+.swatchColorValue {
+  position: relative;
+  width: 130px;
+  margin: 0 auto;
+}
+
+.swatchColorPointer {
+  width: 0;
+  height: 0;
+  border-top: 150px solid transparent;
+  border-bottom: 150px solid transparent;
+  border-left: 40px solid transparent;
+  position: absolute;
+  z-index: 10;
+  top: 0px;
+  right: -40px;
+}
+
+label{
+  &[for*='hex'] {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    position: absolute;
+    padding: 0 0 0 1.3em;
+    z-index: 501;
+  }
+
+  &[for='hexInput'] {
+    color: rgba(0,0,0,.325);
+  }
+
+  &[for='hexOutput'] {
+    color: rgba(255,255,255,.325);
+  }
+}
+
+input {
+  &[name*='hex'] {
+    border: 0;
+    border-radius: 3px;
+    padding-left: 2em;
+    font-size: 1em;
+    height: 44px;
+    width: 100%;
+    font-family: 'Droid Sans Mono', Courier, monospace;
+    position: relative;
+    z-index: 500;
+    text-transform: uppercase;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &[name='hexInput'] {
+    border: 1px solid #e0e0e0;
+    color: rgba(0,0,0,.87);
+    box-shadow: inset 0 0 3px rgba(0,0,0,.075);
+
+    &:focus {
+      border: 1px solid $colorPrimary;
+      box-shadow: 0 0 8px rgba($colorPrimary, 0.6);
+    }
+  }
+
+  &[name='hexOutput'] {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.initialHelp {
+  opacity: 1;
+  font-family: 'Droid Sans', Helvetica, Arial;
+  position: absolute;
+  left: 45%;
+  top: 40%;
+  color: #777777;
+  font-size: 0.875em;
+  line-height: 4em;
+  width: 400px;
+  color: $colorPrimary;
+  z-index: 400;
+}
+
+/**
+ * Code Output
+ */
+
+.codeOutput {
+  clear: both;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0,0,0,.1);
+
+  input {
+    font-family: 'Droid Sans Mono', Courier, monospace;
+    padding: 14px 0;
+    margin: 0;
+    font-size: 1em;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    border: none;
+
+    &::placeholder {
+      font-family: 'Droid Sans', Arial, sans-serif;
+      color: $colorPrimary;
+    }
+
+    &:hover {
+      color: $colorPrimary;
+    }
+  }
+}
+
+/**
+ * Input Sliders
+ * A custom appearance for sliders if webkit browser
+ */
+
+input[type='range'] {
+  -webkit-appearance: none;
+  background-color: #ddd;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #eee;
+  height: 8px;
+  border-radius: 6px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  z-index: 100;
+  position: relative;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  outline: none;
+  background-repeat: no-repeat;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  background: transparent url(./img/range-handle@2x.png) no-repeat;
+  background-size: 20px 20px;
+}
+
+@mixin leftArrow() {
+  &:before {
+    content: '\2190';
+    margin-right: 5px;
+  }
+}
+
+@mixin rightArrow() {
+  &:after {
+    content: '\2192';
+    margin-left: 5px;
+  }
+}
+
+.sliderLabel {
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
+  display: block;
+
+  &[for='sliderAdjustHue'] {
+    @include leftArrow();
+    @include rightArrow();
+    text-align: center;
+  }
+
+  &[for='sliderLighten'],
+  &[for='sliderSaturate'] {
+    span {
+      &:first-child {
+        float: left;
+        width: 50%;
+        padding-right: 15px;
+        text-align: right;
+        border-right: 1px solid rgba(0,0,0,.5);
+        @include leftArrow();
+      }
+      &:last-child {
+        float: right;
+        width: 50%;
+        padding-left: 15px;
+        text-align: left;
+        @include rightArrow();
+      }
+    }
+  }
+}
