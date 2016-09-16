@@ -79,10 +79,10 @@ export function rgb2hsl(rgb) {
     default:
       break;
   }
-
   if (h < 0) {
     h = 360 + h;
   }
+
   const l = (max + min) / 2.0;
   const s = max === min
     ? 0
