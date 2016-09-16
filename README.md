@@ -1,6 +1,6 @@
 # SassMe
 
-[![Screenshot of Sassme](https://i.imgur.com/9fPZaaU.png)]](http://jim-nielsen.com/sassme/)
+[![Screenshot of Sassme](https://i.imgur.com/9fPZaaU.png)](http://jim-nielsen.com/sassme/)
 
 Dynamically view the output of Sass HSL color functions in the browser. The following Sass HSL functions are available for manipulation:
 
