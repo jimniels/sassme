@@ -12,13 +12,17 @@ Dynamically view the output of Sass HSL color functions in the browser. The foll
 
 ## Development
 
-Project is built with React and based on Facebook’s officially supported [react-create-app](https://github.com/facebookincubator/create-react-app) package.
+Project is built with React and based on Facebook’s officially supported [react-create-app](https://github.com/facebookincubator/create-react-app) package. There are two relevant commands for local development:
 
-### Develop Locally
+1. `npm run start` - This will start the javascript development server using scripts from `react-create-app`.
+2. `npm run css:watch` - If you’re going to be editing the CSS, make sure you run this command in a separate terminal window. This runs Sass, watches for CSS changes, and recompiles them to `src/index.css`. The development server will detect any changes to that file and recompile as necessary.
 
-To work on the app: `npm run start` (this will start the javascript development server using scripts from `react-create-app`)
+## Deployment
 
-If you’re going to be editing the CSS, make sure you run `npm run css:watch` in another terminal window. This runs Sass, watches for CSS changes, and recompiles them to `src/index.css`. The `npm run start` will detect any changes to that file and recompile as necessary.
+Site is hosted on Github pages. `gh-pages` is the active build being hosted. `master` branch reflects current state of code.
+
+1. `npm run build` - Creates a new folder `build` in the project root that contains the entire project (controlled by [react-create-app](https://github.com/facebookincubator/create-react-app))
+2. `./deploy.sh` - Deploys the `build` folder to the `gh-pages` branch.
 
 ## About
 
