@@ -1,7 +1,11 @@
 {
   "name": "sassme",
   "homepage": "http://jim-nielsen.com/sassme",
-  "version": "0.1.0",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimniels/sassme"
+  },
   "private": true,
   "devDependencies": {
     "lodash": "^4.15.0",
