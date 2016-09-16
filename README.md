@@ -1,6 +1,6 @@
 # SassMe
 
-![Screenshot of Sassme](https://i.imgur.com/9fPZaaU.png)
+[![Screenshot of Sassme](https://i.imgur.com/9fPZaaU.png)]](http://jim-nielsen.com/sassme/)
 
 Dynamically view the output of Sass HSL color functions in the browser. The following Sass HSL functions are available for manipulation:
 
@@ -26,11 +26,9 @@ Site is hosted on Github pages. `gh-pages` is the active build being hosted. `ma
 
 ## About
 
-### History
+This project was originally conceived and built at Arc90. When first deployed, it lived on the web at `http://sassme.arc90.com/` and the original codebase was hosted under Arc90’s Github account at [arc90/sass-color-picker](https://github.com/arc90/sass-color-picker). However, due to organization conflicts, that repo is no longer maintained. This is now the **official** successor.
 
-This project was originally conceived and built at Arc90. The original repo can still be found at [arc90/sass-color-picker](https://github.com/arc90/sass-color-picker). However, due to organization conflicts, that project is no longer maintained. This is now the **officially** successor.
-
-Many thanks to those who helped build v1.0 [LINK] of SassMe:
+Many thanks to those who helped build [v1.0 of SassMe](https://github.com/jimniels/sassme/releases/tag/1.0):
 
 - Jim Nielsen / jimniels (current project owner) [LINK]
 - Darren Newton / DarrenN [LINK]
