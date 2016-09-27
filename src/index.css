@@ -74,7 +74,7 @@ table {
 .headerTagline {
   padding-top: 22px;
   position: relative;
-  max-width: 450px;
+  max-width: 500px;
   margin-left: 190px; }
   @media screen and (max-width: 565px) {
     .headerTagline {
