@@ -30,10 +30,10 @@ This project was originally conceived and built at Arc90. When first deployed, i
 
 Many thanks to those who helped build [v1.0 of SassMe](https://github.com/jimniels/sassme/releases/tag/1.0):
 
-- Jim Nielsen / jimniels (current project owner) [LINK]
-- Darren Newton / DarrenN [LINK]
-- Robert Petro / robertjpetro [LINK]
-- Matt Quintanilla / mattq [LINK]
+- Jim Nielsen / [@jimniels](https://github.com/jimniels)  
+- Darren Newton / [@DarrenN](https://github.com/DarrenN)  
+- Robert Petro / [@robertjpetro](https://github.com/robertjpetro)  
+- Matt Quintanilla / [@mattq](https://github.com/mattq)  
 - Jesse Reiner
 
 ```text
