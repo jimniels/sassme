@@ -57,31 +57,22 @@ table {
   width: 100%;
   overflow: auto;
   color: #808C99; }
+  @media screen and (min-width: 565px) {
+    .header {
+      display: flex;
+      align-items: center; } }
 
 .headerLogo {
-  float: left;
-  width: 168px;
-  height: 72px;
-  overflow: visible;
-  background: url(./img/sassme-logo.svg) 0 0 no-repeat;
-  text-indent: -9999px;
-  margin: 0; }
-  @media screen and (max-width: 565px) {
+  text-align: center; }
+  @media screen and (min-width: 565px) {
     .headerLogo {
-      float: none;
-      margin: 0 auto; } }
+      margin-right: 20px; } }
 
 .headerTagline {
-  padding-top: 22px;
-  position: relative;
-  max-width: 500px;
-  margin-left: 190px; }
+  position: relative; }
   @media screen and (max-width: 565px) {
     .headerTagline {
-      width: 90%;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 10px; } }
+      text-align: center; } }
 
 .headerTaglin p {
   position: absolute;
