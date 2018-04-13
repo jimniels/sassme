@@ -12,10 +12,9 @@ Dynamically view the output of Sass HSL color functions in the browser. The foll
 
 ## Development
 
-Project is built with React and based on Facebook’s officially supported [react-create-app](https://github.com/facebookincubator/create-react-app) package. There are two relevant commands for local development:
-
-1. `npm run start` - This will start the javascript development server using scripts from `react-create-app`.
-2. `npm run css:watch` - If you’re going to be editing the CSS, make sure you run this command in a separate terminal window. This runs Sass, watches for CSS changes, and recompiles them to `src/index.css`. The development server will detect any changes to that file and recompile as necessary.
+```bash
+npm run start
+```
 
 ## Deployment
 

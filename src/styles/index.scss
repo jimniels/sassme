@@ -265,34 +265,7 @@ input {
 
 /**
  * Input Sliders
- * A custom appearance for sliders if webkit browser
  */
-
-input[type='range'] {
-  -webkit-appearance: none;
-  background-color: #ddd;
-  border-top: 1px solid #aaa;
-  border-bottom: 1px solid #eee;
-  height: 8px;
-  border-radius: 6px;
-}
-
-input[type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  z-index: 100;
-  position: relative;
-  top: 0px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  outline: none;
-  background-repeat: no-repeat;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  background: transparent url(./img/range-handle@2x.png) no-repeat;
-  background-size: 20px 20px;
-}
 
 @mixin leftArrow() {
   &:before {

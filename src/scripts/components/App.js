@@ -1,10 +1,30 @@
 import React, {Component} from 'react';
+import {string, number} from 'prop-types';
 import {isNil, toString} from 'lodash';
 import {getCode, transformHex} from '../utils/colorTransforms';
 import Header from './Header';
 import SassTests from './SassTests';
 
 export default class App extends Component {
+  static propTypes = {
+    hex: string,
+    lighten: number,
+    darken: number,
+    saturate: number,
+    desaturate: number,
+    adjust_hue: number
+  };
+
+  static defaultProps = {
+    // @type {SassMeState}
+    hex: '',
+    lighten: undefined,
+    darken: undefined,
+    saturate: undefined,
+    desaturate: undefined,
+    adjust_hue: undefined
+  };
+
   constructor(props) {
     super(props);
 
@@ -241,21 +261,3 @@ export default class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  hex: React.PropTypes.string,
-  lighten: React.PropTypes.number,
-  darken: React.PropTypes.number,
-  saturate: React.PropTypes.number,
-  desaturate: React.PropTypes.number,
-  adjust_hue: React.PropTypes.number
-};
-// @type {SassMeState}
-App.defaultProps = {
-  hex: '',
-  lighten: undefined,
-  darken: undefined,
-  saturate: undefined,
-  desaturate: undefined,
-  adjust_hue: undefined
-};
