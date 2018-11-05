@@ -18,12 +18,10 @@
     "react-dom": "^16.3.1"
   },
   "scripts": {
-    "css:watch": "./node_modules/node-sass/bin/node-sass -w src/styles/index.scss src/index.css",
-    "css:build": "./node_modules/node-sass/bin/node-sass src/styles/index.scss src/index.css",
-    "prestart": "npm run css:build",
-    "start": "npm run css:watch & react-scripts start",
-    "prebuild": "npm run css:build",
-    "build": "react-scripts build",
+    "css:watch": "node-sass -w src/styles/index.scss src/index.css",
+    "css:build": "node-sass src/styles/index.scss src/index.css",
+    "start": "npm run css:build && npm run css:watch & react-scripts start",
+    "build": "npm run css:build && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

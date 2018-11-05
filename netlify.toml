@@ -1,0 +1,10 @@
+[build]
+  base = ""
+  publish = "build"
+  command = "npm run build"
+
+[[redirects]]
+  from = "https://sassme.netlify.com/*"
+  to = "https://sassme.jim-nielsen.com/:splat"
+  status = 301
+  force = true

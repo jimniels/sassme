@@ -10,18 +10,11 @@ Dynamically view the output of Sass HSL color functions in the browser. The foll
 - [`desaturate()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#desaturate-instance_method) (same as `grayscale()`)
 - [`adjust-hue()`](http://sass-lang.com/documentation/Sass/Script/Functions.html#adjust_hue-instance_method)
 
-## Development
+## Development: `npm run start`
 
-```bash
-npm run start
-```
-
-## Deployment
+## Build: `npm run build`
 
 Site is hosted on Github pages. `gh-pages` is the active build being hosted. `master` branch reflects current state of code.
-
-1. `npm run build` - Creates a new folder `build` in the project root that contains the entire project (controlled by [react-create-app](https://github.com/facebookincubator/create-react-app))
-2. `./deploy.sh` - Deploys the `build` folder to the `gh-pages` branch.
 
 ## About
 
@@ -29,21 +22,20 @@ This project was originally conceived and built at Arc90. When first deployed, i
 
 Many thanks to those who helped build [v1.0 of SassMe](https://github.com/jimniels/sassme/releases/tag/1.0):
 
-- Jim Nielsen / [@jimniels](https://github.com/jimniels)  
-- Darren Newton / [@DarrenN](https://github.com/DarrenN)  
-- Robert Petro / [@robertjpetro](https://github.com/robertjpetro)  
-- Matt Quintanilla / [@mattq](https://github.com/mattq)  
+- Jim Nielsen / [@jimniels](https://github.com/jimniels)
+- Darren Newton / [@DarrenN](https://github.com/DarrenN)
+- Robert Petro / [@robertjpetro](https://github.com/robertjpetro)
+- Matt Quintanilla / [@mattq](https://github.com/mattq)
 - Jesse Reiner
 
 ```text
- ____                                      __     
-/\  _`\                                   /\ \    
-\ \,\L\_\     __      ____    ____  __  __\ \ \   
- \/_\__ \   /'__`\   /',__\  /',__\/\ \/\ \\ \ \  
+ ____                                      __
+/\  _`\                                   /\ \
+\ \,\L\_\     __      ____    ____  __  __\ \ \
+ \/_\__ \   /'__`\   /',__\  /',__\/\ \/\ \\ \ \
    /\ \L\ \/\ \L\.\_/\__, `\/\__, `\ \ \_\ \\ \_\
    \ `\____\ \__/.\_\/\____/\/\____/\/`____ \\/\_\
     \/_____/\/__/\/_/\/___/  \/___/  `/___/> \\/_/
-                                        /\___/    
-                                        \/__/     
-
+                                        /\___/
+                                        \/__/
 ```
